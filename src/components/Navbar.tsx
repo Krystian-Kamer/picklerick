@@ -10,7 +10,7 @@ const Navbar = () => {
         {links.map((link) => {
           return (
             <NavLink
-              className='uppercase font-bold text-sm sm:text-lg lg:text-xl'
+              className='uppercase font-bold text-sm sm:text-lg lg:text-xl hover:scale-105 duration-500'
               style={
                 link === pathname.substring(1)
                   ? { color: '#90e771' }
