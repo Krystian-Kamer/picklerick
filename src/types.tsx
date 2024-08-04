@@ -3,3 +3,7 @@ export type Category = {
   path: string;
   img: string;
 };
+
+export type Title = {
+  title: string
+}

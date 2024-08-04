@@ -1,4 +1,11 @@
-import { Title, Info, Categories } from '../components';
+import {
+  Title,
+  Info,
+  Categories,
+  RandomCharacters,
+  RandomEpisodes,
+  RandomLocations,
+} from '../components';
 
 const Landing = () => {
   return (
@@ -6,7 +13,10 @@ const Landing = () => {
       <article className='min-h-96 max-w-7xl mx-auto'>
         <Title title='about this project' />
         <Info />
-        <Categories/>
+        <Categories />
+        <RandomCharacters />
+        <RandomLocations />
+        <RandomEpisodes />
       </article>
     </div>
   );

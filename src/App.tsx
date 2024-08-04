@@ -1,5 +1,3 @@
-// import picklerick from './assets/picklerick.png'
-
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {
   Characters,
@@ -13,6 +11,10 @@ import {
   Landing,
 } from './pages';
 
+import { loader as charactersLoader } from './pages/Characters';
+import { loader as locationsLoader } from './pages/Locations';
+import { loader as episodesLoader } from './pages/Episodes';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,11 +25,11 @@ const router = createBrowserRouter([
         index: true,
         element: <Landing />,
       },
-      { path: 'characters', element: <Characters /> },
+      { path: 'characters', element: <Characters />, loader: charactersLoader },
       { path: 'characters/:id', element: <SingleCharacter /> },
-      { path: 'locations', element: <Locations /> },
+      { path: 'locations', element: <Locations />, loader: locationsLoader },
       { path: 'locations/:id', element: <SingleLocation /> },
-      { path: 'episodes', element: <Episodes /> },
+      { path: 'episodes', element: <Episodes />, loader: episodesLoader },
       { path: 'episodes/:id', element: <SingleEpisode /> },
     ],
   },
