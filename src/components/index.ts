@@ -6,9 +6,8 @@ export { default as ToolsIcons } from './ToolsIcons';
 export { default as Info } from './Info';
 export { default as Categories } from './Categories';
 export { default as RandomCharacters } from './RandomCharacters';
-export { default as RandomLocations } from './RandomLocations';
-export { default as RandomEpisodes } from './RandomEpisodes';
-
 export { default as CharactersFilter } from './CharactersFilter';
 export { default as LocationsFilter } from './LocationsFilter';
 export { default as EpisodesFilter } from './EpisodesFilter';
+export { default as CharactersContainer } from './CharactersContainer';
+export { default as PaginationContainer } from './PaginationContainer';

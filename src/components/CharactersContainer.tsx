@@ -1,0 +1,44 @@
+import { useLoaderData, Link } from 'react-router-dom';
+import { CharacterResponse } from '../types';
+
+const CharactersContainer = () => {
+  const characters = (useLoaderData() as CharacterResponse).results;
+  console.log(characters);
+
+  return (
+    <div className='grid sm:grid-cols-2 lg:grid-cols-2'>
+      {characters.map((character) => {
+        const { id, image, name, species, status, location } = character;
+        return (
+          <div
+            key={id}
+            className='my-3 rounded-3xl overflow-hidden flex flex-col m-5 lg:flex-row border-4 border-slate-900 bg-slate-900 text-white relative group lg:w-fit'
+          >
+            <img src={image} alt={name} />
+            <div className='p-4 relative'>
+              <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline'>
+                {name}
+              </p>
+              <p className='text-lg'>
+                species: <span className='text-2xl'>{species}</span>
+              </p>
+              <p className='text-lg'>
+                status: <span className='text-2xl'>{status}</span>
+              </p>
+              <p className='text-lg mb-6'>
+                location: <span className='text-2xl py-10'>{location.name}</span>
+              </p>
+              <Link
+                to={`/characters/${id}`}
+                className='block absolute bottom-0 right-0 bg-lime-200 text-slate-900 px-3 py-2'
+              >
+                <span>more info</span>
+              </Link>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+export default CharactersContainer;

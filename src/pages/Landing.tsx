@@ -3,8 +3,6 @@ import {
   Info,
   Categories,
   RandomCharacters,
-  RandomEpisodes,
-  RandomLocations,
 } from '../components';
 
 const Landing = () => {
@@ -15,8 +13,6 @@ const Landing = () => {
         <Info />
         <Categories />
         <RandomCharacters />
-        <RandomLocations />
-        <RandomEpisodes />
       </article>
     </div>
   );
