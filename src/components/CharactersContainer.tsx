@@ -8,7 +8,6 @@ const CharactersContainer = () => {
     <div className='grid sm:grid-cols-2'>
       {characters.map((character) => {
         const { id, image, name, species, status, location } = character;
-        console.log(status);
         return (
           <div
             key={id}
@@ -18,7 +17,8 @@ const CharactersContainer = () => {
               <img
                 src={image}
                 alt={name}
-                className='h-full w-full  object-cover group-hover:scale-105 duration-1000'
+                className='h-full w-full  object-cover 
+                group-hover:scale-105 duration-700'
               />
             </div>
             <div className='p-4 relative'>

@@ -1,9 +1,17 @@
 import { Title, Info, Categories, RandomCharacters } from '../components';
 import { Character } from '../types';
 import { customFetch, getRandomCharacters } from '../utils';
+import { QueryClient, QueryKey } from '@tanstack/react-query';
 
-export const loader = async () => {
-  const response = await customFetch(`/character/${getRandomCharacters()}`);
+const fetchedRandomCharactersQuery = {
+  queryKey: ['randomCharacters'] as QueryKey,
+  queryFn: () => customFetch(`/character/${getRandomCharacters()}`),
+};
+
+export const loader = (queryClient: QueryClient) => async () => {
+  const response = await queryClient.ensureQueryData(
+    fetchedRandomCharactersQuery
+  );
   const characters: Character[] = response.data;
   return characters;
 };

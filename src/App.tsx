@@ -10,11 +10,21 @@ import {
   Error,
   Landing,
 } from './pages';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 
 import { loader as charactersLoader } from './pages/Characters';
 import { loader as locationsLoader } from './pages/Locations';
 import { loader as episodesLoader } from './pages/Episodes';
 import { loader as landingLoader } from './pages/Landing';
+import { loader as singleCharacterLoader } from './pages/SingleCharacter';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { staleTime: 1000 + 60 + 5 },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -25,10 +35,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
-        loader: landingLoader,
+        loader: landingLoader(queryClient),
       },
-      { path: 'characters', element: <Characters />, loader: charactersLoader },
-      { path: 'characters/:id', element: <SingleCharacter /> },
+      {
+        path: 'characters',
+        element: <Characters />,
+        loader: charactersLoader(queryClient),
+      },
+      { path: 'characters/:id', element: <SingleCharacter />, loader: singleCharacterLoader },
       { path: 'locations', element: <Locations />, loader: locationsLoader },
       { path: 'locations/:id', element: <SingleLocation /> },
       { path: 'episodes', element: <Episodes />, loader: episodesLoader },
@@ -39,9 +53,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-    </>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
