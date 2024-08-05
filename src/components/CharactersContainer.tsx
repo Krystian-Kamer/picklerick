@@ -6,15 +6,17 @@ const CharactersContainer = () => {
   console.log(characters);
 
   return (
-    <div className='grid sm:grid-cols-2 lg:grid-cols-2'>
+    <div className='grid sm:grid-cols-2'>
       {characters.map((character) => {
         const { id, image, name, species, status, location } = character;
         return (
           <div
             key={id}
-            className='my-3 rounded-3xl overflow-hidden flex flex-col m-5 lg:flex-row border-4 border-slate-900 bg-slate-900 text-white relative group lg:w-fit'
+            className='rounded-3xl overflow-hidden flex flex-col lg:flex-row border-4 border-slate-900 bg-slate-900 text-white m-10 relative group'
           >
-            <img src={image} alt={name} />
+            <div className=' bg-slate-50 lg:max-w-64 overflow-hidden'>
+              <img src={image} alt={name} className='h-full w-full  object-cover group-hover:scale-105 duration-1000' />
+            </div>
             <div className='p-4 relative'>
               <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline'>
                 {name}
@@ -26,15 +28,16 @@ const CharactersContainer = () => {
                 status: <span className='text-2xl'>{status}</span>
               </p>
               <p className='text-lg mb-6'>
-                location: <span className='text-2xl py-10'>{location.name}</span>
+                location:
+                <span className='text-2xl py-10'>{location.name}</span>
               </p>
-              <Link
-                to={`/characters/${id}`}
-                className='block absolute bottom-0 right-0 bg-lime-200 text-slate-900 px-3 py-2'
-              >
-                <span>more info</span>
-              </Link>
             </div>
+            <Link
+              to={`/characters/${id}`}
+              className='block absolute bottom-0 right-0 bg-lime-200 text-slate-900 px-3 py-2 rounded-tl-3xl hover:px-8 hover:bg-cyan-100 duration-500'
+            >
+              <span className='uppercase font-bold'>more info</span>
+            </Link>
           </div>
         );
       })}
