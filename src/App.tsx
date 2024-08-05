@@ -14,6 +14,7 @@ import {
 import { loader as charactersLoader } from './pages/Characters';
 import { loader as locationsLoader } from './pages/Locations';
 import { loader as episodesLoader } from './pages/Episodes';
+import { loader as landingLoader } from './pages/Landing';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
+        loader: landingLoader,
       },
       { path: 'characters', element: <Characters />, loader: charactersLoader },
       { path: 'characters/:id', element: <SingleCharacter /> },

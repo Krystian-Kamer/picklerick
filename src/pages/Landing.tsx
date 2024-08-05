@@ -1,9 +1,12 @@
-import {
-  Title,
-  Info,
-  Categories,
-  RandomCharacters,
-} from '../components';
+import { Title, Info, Categories, RandomCharacters } from '../components';
+import { Character } from '../types';
+import { customFetch, getRandomCharacters } from '../utils';
+
+export const loader = async () => {
+  const response = await customFetch(`/character/${getRandomCharacters()}`);
+  const characters: Character[] = response.data;
+  return characters;
+};
 
 const Landing = () => {
   return (
