@@ -1,6 +1,10 @@
+
+
+
 const SingleLocation = () => {
+
   return (
-    <div>SingleLocation</div>
+    <div>Lista osób</div>
   )
 }
 export default SingleLocation

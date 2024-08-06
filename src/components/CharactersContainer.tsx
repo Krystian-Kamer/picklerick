@@ -13,14 +13,17 @@ const CharactersContainer = () => {
             key={id}
             className='rounded-3xl overflow-hidden flex flex-col lg:flex-row border-4 border-slate-900 bg-slate-900 text-white m-10 relative group'
           >
-            <div className=' bg-slate-50 lg:max-w-64 overflow-hidden'>
+            <Link
+              to={`/characters/${id}`}
+              className=' bg-slate-50 lg:max-w-64 overflow-hidden'
+            >
               <img
                 src={image}
                 alt={name}
                 className='h-full w-full  object-cover 
                 group-hover:scale-105 duration-700'
               />
-            </div>
+            </Link>
             <div className='p-4 relative'>
               <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline'>
                 {name}

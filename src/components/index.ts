@@ -10,3 +10,4 @@ export { default as CharactersFilter } from './CharactersFilter';
 export { default as LocationsFilter } from './LocationsFilter';
 export { default as EpisodesFilter } from './EpisodesFilter';
 export { default as CharactersContainer } from './CharactersContainer';
+export { default as FormSelect } from './FormSelect';

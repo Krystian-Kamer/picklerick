@@ -3,7 +3,6 @@ import {
   Characters,
   SingleCharacter,
   SingleEpisode,
-  SingleLocation,
   Locations,
   Episodes,
   HomeLayout,
@@ -12,7 +11,6 @@ import {
 } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
 
 import { loader as charactersLoader } from './pages/Characters';
 import { loader as locationsLoader } from './pages/Locations';
@@ -42,9 +40,16 @@ const router = createBrowserRouter([
         element: <Characters />,
         loader: charactersLoader(queryClient),
       },
-      { path: 'characters/:id', element: <SingleCharacter />, loader: singleCharacterLoader },
-      { path: 'locations', element: <Locations />, loader: locationsLoader },
-      { path: 'locations/:id', element: <SingleLocation /> },
+      {
+        path: 'characters/:id',
+        element: <SingleCharacter />,
+        loader: singleCharacterLoader,
+      },
+      {
+        path: 'locations',
+        element: <Locations />,
+        loader: locationsLoader(queryClient),
+      },
       { path: 'episodes', element: <Episodes />, loader: episodesLoader },
       { path: 'episodes/:id', element: <SingleEpisode /> },
     ],

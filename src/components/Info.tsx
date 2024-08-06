@@ -14,7 +14,7 @@ const Info = () => {
           Welcome in my dimension.
         </h2>
         <p className='text-2xl py-8'>
-          My name is Pickle Rick. So I explain to you quickly, Morty how this
+          My name is Pickle Rick. So I explain to you quickly, Morty, how this
           page works. Page is created by my slave - Krystian. This is a project
           created by him to test his skills, but mostly, because I gave him that
           order and he is not smart enough to desert. He is using:

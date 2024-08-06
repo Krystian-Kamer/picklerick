@@ -40,3 +40,18 @@ export type CharacterResponse = {
   results: Character[];
   info: Pagination;
 };
+
+export type Location = {
+  id: number;
+  name: string;
+  type: string;
+  dimensions: string;
+  residents: string[];
+  url: string;
+  created: string;
+};
+
+export type LocationResponse = {
+  results: Location[];
+  info: Pagination;
+};
