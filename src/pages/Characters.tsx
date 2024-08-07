@@ -2,15 +2,37 @@ import { CharactersContainer, CharactersFilter, Title } from '../components';
 import { customFetch } from '../utils';
 import type { CharacterResponse, Pagination, Character } from '../types';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
+import { LoaderFunctionArgs, Params } from 'react-router-dom';
 
-const fetchedCharactersQuery = {
-  queryKey: ['characters'] as QueryKey,
-  queryFn: () => customFetch('/character'),
+const fetchedCharactersQuery = (queryParams: Params) => {
+  const { name, gender, status } = queryParams;
+  return {
+    queryKey: [
+      'characters',
+      name ?? '',
+      gender ?? '',
+      status ?? '',
+    ] as QueryKey,
+    queryFn: () => customFetch('/character', { params: queryParams }),
+  };
 };
 
 export const loader =
-  (queryClient: QueryClient) => async (): Promise<CharacterResponse> => {
-    const response = await queryClient.ensureQueryData(fetchedCharactersQuery);
+  (queryClient: QueryClient) =>
+  async (data: LoaderFunctionArgs): Promise<CharacterResponse> => {
+    const params = Object.fromEntries([
+      ...new URL(data.request.url).searchParams.entries(),
+    ]) as Params;
+
+    const filteredParams = Object.fromEntries(
+      Object.entries(params).filter(
+        ([key, value]) => key === 'name' || value !== 'all'
+      )
+    );
+    console.log(filteredParams);
+    const response = await queryClient.ensureQueryData(
+      fetchedCharactersQuery(filteredParams)
+    );
     const { info, results } = response.data as {
       info: Pagination;
       results: Character[];

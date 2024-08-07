@@ -25,10 +25,10 @@ const CharactersContainer = () => {
               />
             </Link>
             <div className='p-4 relative'>
-              <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline'>
+              <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline selection:text-lime-200'>
                 {name}
               </p>
-              <p className='text-lg'>
+              <p className='text-lg selection:text-lime-200'>
                 status:{' '}
                 <span
                   className={
@@ -42,10 +42,10 @@ const CharactersContainer = () => {
                   {status}
                 </span>
               </p>
-              <p className='text-lg'>
+              <p className='text-lg selection:text-lime-200'>
                 species: <span className='text-2xl'>{species}</span>
               </p>
-              <p className='text-lg mb-6'>
+              <p className='text-lg mb-6 selection:text-lime-200'>
                 location:{' '}
                 <span className='text-2xl py-10'>{location.name}</span>
               </p>

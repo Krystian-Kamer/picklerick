@@ -18,11 +18,7 @@ import { loader as episodesLoader } from './pages/Episodes';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleCharacterLoader } from './pages/SingleCharacter';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { staleTime: 1000 + 60 + 5 },
-  },
-});
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {

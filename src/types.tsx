@@ -24,8 +24,8 @@ export type Character = {
     url: string;
   };
   species: string;
-  status: string;
-  type: string;
+  status: 'Alive' | 'Dead' | 'unknown';
+  type: 'Female' | 'Male' | 'Genderless' | 'unknown';
   url: string;
 };
 
