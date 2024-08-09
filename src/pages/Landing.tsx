@@ -1,12 +1,16 @@
-import { Title, Info, Categories, RandomCharacters } from '../components';
+import {
+  Title,
+  Info,
+  Categories,
+  ListOfCharacters,
+} from '../components';
 import { Character } from '../types';
 import { customFetch, getRandomCharacters } from '../utils';
-import { QueryClient, QueryKey } from '@tanstack/react-query';
 
-export const loader = (queryClient: QueryClient) => async () => {
+export const loader = async () => {
   const response = await customFetch(`/character/${getRandomCharacters()}`);
   const characters: Character[] = response.data;
-  return characters;
+  return { characters };
 };
 
 const Landing = () => {
@@ -16,7 +20,8 @@ const Landing = () => {
         <Title title='about this project' />
         <Info />
         <Categories />
-        <RandomCharacters />
+        <Title title='random characters' />
+        <ListOfCharacters />
       </article>
     </div>
   );

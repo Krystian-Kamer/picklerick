@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom';
-import { Header, Navbar, Footer } from '../components';
+import { Outlet, useNavigation } from 'react-router-dom';
+import { Header, Navbar, Footer, Loading } from '../components';
 
 const HomeLayout = () => {
+  const navigation = useNavigation();
+  const isPageLoading = navigation.state === 'loading';
+ 
   return (
     <div className='flex flex-col'>
       <Header />
       <Navbar />
-      <Outlet />
+      {isPageLoading ? <Loading/> : <Outlet />}
       <Footer />
     </div>
   );

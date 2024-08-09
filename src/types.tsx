@@ -45,13 +45,15 @@ export type Location = {
   id: number;
   name: string;
   type: string;
-  dimensions: string;
+  dimension: string;
   residents: string[];
   url: string;
   created: string;
 };
 
 export type LocationResponse = {
-  results: Location[];
-  info: Pagination;
+  results?: Location[];
+  info?: Pagination;
+  characters: Character[];
+  singleLocation?: Location;
 };

@@ -17,6 +17,8 @@ import { loader as locationsLoader } from './pages/Locations';
 import { loader as episodesLoader } from './pages/Episodes';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleCharacterLoader } from './pages/SingleCharacter';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient();
 
@@ -29,7 +31,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
-        loader: landingLoader(queryClient),
+        loader: landingLoader,
       },
       {
         path: 'characters',
@@ -55,6 +57,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastContainer position='top-center' autoClose={3000} />
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

@@ -1,11 +1,16 @@
-import { LocationsFilter, Title } from '../components';
+import {
+  LocationsFilter,
+  Title,
+  SingleLocation,
+  ListOfCharacters,
+} from '../components';
 import { customFetch } from '../utils';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 import type { Pagination, Location } from '../types';
-import SingleLocation from './SingleLocation';
+
 const fetchedLocationsQuery = {
   queryKey: ['locations'] as QueryKey,
-  queryFn: () => customFetch('/location'),
+  queryFn: () => customFetch('/location/?page=2'),
 };
 
 export const loader = (queryClient: QueryClient) => async () => {
@@ -14,7 +19,26 @@ export const loader = (queryClient: QueryClient) => async () => {
     info: Pagination;
     results: Location[];
   };
-  return { info, results };
+  const singleLocation = results[0];
+  // here I must check if characters are existing and if not I must do something
+  const charactersIdInSingleLocation = singleLocation.residents.map(
+    (character) => Number(character.substring(42))
+  );
+
+  const fetchCharacters = async () => {
+    const response = await customFetch(
+      `/character/${charactersIdInSingleLocation}`
+    );
+    if (!response.data || !response.data[0]?.id) {
+      const fallbackResponse = await customFetch(`/character/1`);
+      return fallbackResponse.data;
+    }
+    return response.data
+  };
+  const characters = await fetchCharacters();
+  console.log(characters);
+
+  return { info, results, singleLocation, characters };
 };
 
 const Locations = () => {
@@ -24,8 +48,11 @@ const Locations = () => {
         <Title title='search & browse cool locations' />
         <LocationsFilter />
         <SingleLocation />
+        <Title title='residents' />
+        <ListOfCharacters />
       </article>
     </div>
   );
 };
+
 export default Locations;

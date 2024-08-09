@@ -1,10 +1,9 @@
 import { IoSearch } from 'react-icons/io5';
 import { Form } from 'react-router-dom';
 
-const genders = [ 'all', 'Male', 'Female', 'Genderless', 'unknown'];
+const genders = ['all', 'Male', 'Female', 'Genderless', 'unknown'];
 
-const status = [ 'all', 'Alive', 'Dead', 'unknown'];
-
+const status = ['all', 'Alive', 'Dead', 'unknown'];
 
 const CharactersFilter = () => {
   return (
@@ -13,9 +12,14 @@ const CharactersFilter = () => {
         <h2 className='text-xl md:text-2xl lg:text-4xl font-semibold py-8 px-4 selection:text-lime-200'>
           Find what you want, dig in, Morty
         </h2>
-        <Form className='flex flex-col w-full' >
+        <Form className='flex flex-col w-full'>
           <div className='flex items-center py-2'>
-            <p className='uppercase w-32 selection:text-lime-200'>By Name</p>
+            <label
+              className='uppercase w-32 selection:text-lime-200'
+              htmlFor='name'
+            >
+              By Name
+            </label>
             <input
               className='bg-slate-900 border-2 border-lime-200 rounded-lg placeholder-slate-400 focus:outline-none px-4 text-xl w-full selection:text-lime-200 selection:bg-slate-800'
               placeholder='Search'
@@ -24,24 +28,42 @@ const CharactersFilter = () => {
             />
           </div>
           <div className='flex items-center py-2'>
-            <p className='uppercase w-32 selection:text-lime-200'>By Gender</p>
+            <label
+              htmlFor='gender'
+              className='uppercase w-32 selection:text-lime-200'
+            >
+              By Gender
+            </label>
             <select
               className=' bg-slate-900 border-2 border-lime-200 rounded-lg px-4 text-xl capitalize w-full focus:outline-none'
               name='gender'
             >
               {genders.map((gender) => {
-                return <option key={gender} value={gender}>{gender}</option>;
+                return (
+                  <option key={gender} value={gender}>
+                    {gender}
+                  </option>
+                );
               })}
             </select>
           </div>
           <div className='flex  items-center py-2'>
-            <p className='uppercase w-32 selection:text-lime-200'>By Status</p>
+            <label
+              htmlFor='status'
+              className='uppercase w-32 selection:text-lime-200'
+            >
+              By Status
+            </label>
             <select
               className='bg-slate-900 border-2 border-lime-200 rounded-lg px-4 text-xl capitalize w-full focus:outline-none'
               name='status'
             >
               {status.map((status) => {
-                return <option key={status} value={status}>{status}</option>;
+                return (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                );
               })}
             </select>
           </div>

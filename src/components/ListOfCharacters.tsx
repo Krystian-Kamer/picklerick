@@ -1,15 +1,16 @@
 import { useLoaderData, Link } from 'react-router-dom';
-import Title from './Title';
-import { Character } from '../types';
+import { LocationResponse } from '../types';
 
-const RandomCharacters = () => {
-  const characters = useLoaderData() as Character[];
+const ListOfCharacters = () => {
+const response = useLoaderData() as LocationResponse;
+const { characters } = response;
 
-  return (
+const charactersArray = Array.isArray(characters) ? characters : [characters];
+
+return (
     <>
-      <Title title='random characters' />
       <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-20 gap-x-4 gap-y-8 justify-center mx-5'>
-        {characters.map((character) => {
+        {charactersArray.map((character) => {
           const { id, name, image } = character;
           return (
             <Link
@@ -36,4 +37,4 @@ const RandomCharacters = () => {
     </>
   );
 };
-export default RandomCharacters;
+export default ListOfCharacters;
