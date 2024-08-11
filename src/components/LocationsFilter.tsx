@@ -1,14 +1,16 @@
-import {
-  useLoaderData,
-  Form,
-} from 'react-router-dom';
+import { useLoaderData, Form, useLocation } from 'react-router-dom';
 import { LocationResponse, Pagination, Location } from '../types';
 import FormSelect from './FormSelect';
 
 const LocationsFilter = () => {
-  const locations = (useLoaderData() as LocationResponse).results as Location[]
-  const pagination = (useLoaderData() as LocationResponse).info as Pagination
-
+  const locations = (useLoaderData() as LocationResponse).results as Location[];
+  const pagination = (useLoaderData() as LocationResponse).info as Pagination;
+  const currentPage = pagination.prev
+    ? Number(pagination.prev.substring(46)) + 1
+    : 1;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const idOfLocation: string = searchParams?.get('location') ?? '0';
 
   return (
     <Form className='flex flex-col items-center bg-slate-900 text-white rounded-3xl mb-10 mx-4 selection:text-lime-200'>
@@ -19,17 +21,35 @@ const LocationsFilter = () => {
         <div className='flex flex-col lg:flex-row gap-x-5 justify-center items-center gap-y-5 mb-10'>
           {pagination.prev !== null && (
             <button
-              className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold'
+              type='submit'
+              name='page'
+              value={currentPage - 1}
+              className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3'
             >
-              prev
+              page {currentPage - 1}
             </button>
           )}
-          <FormSelect data={locations} />
+
+          <button
+            type='submit'
+            name='page'
+            value={currentPage}
+            className='hidden'
+          ></button>
+
+          <FormSelect
+            data={locations}
+            name='location'
+            idOfLocation={idOfLocation}
+          />
           {pagination.next !== null && (
             <button
-              className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold'
+              type='submit'
+              name='page'
+              value={currentPage + 1}
+              className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3'
             >
-              next
+              page {currentPage + 1}
             </button>
           )}
         </div>
