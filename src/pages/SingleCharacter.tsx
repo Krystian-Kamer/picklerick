@@ -33,6 +33,8 @@ const SingleCharacter = () => {
     episode,
   } = character;
 
+  console.log(location, origin, episode);
+
   return (
     <>
       <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400'>
@@ -81,7 +83,7 @@ const SingleCharacter = () => {
               <p className='text-lg py-2'>
                 created: <span className='text-2xl '>{created}</span>
               </p>
-              {type !== '' && (
+              {type && (
                 <p className='text-lg py-2'>
                   type: <span className='text-2xl py-10'>{type}</span>
                 </p>

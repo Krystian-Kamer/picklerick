@@ -1,4 +1,4 @@
-import { useLoaderData, Form, useLocation } from 'react-router-dom';
+import { useLoaderData, Form } from 'react-router-dom';
 import { LocationResponse, Pagination, Location } from '../types';
 import FormSelect from './FormSelect';
 
@@ -8,9 +8,6 @@ const LocationsFilter = () => {
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(46)) + 1
     : 1;
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const idOfLocation: string = searchParams?.get('location') ?? '0';
 
   return (
     <Form className='flex flex-col items-center bg-slate-900 text-white rounded-3xl mb-10 mx-4 selection:text-lime-200'>
@@ -29,19 +26,13 @@ const LocationsFilter = () => {
               page {currentPage - 1}
             </button>
           )}
-
           <button
             type='submit'
             name='page'
             value={currentPage}
             className='hidden'
           ></button>
-
-          <FormSelect
-            data={locations}
-            name='location'
-            idOfLocation={idOfLocation}
-          />
+          <FormSelect data={locations} name='location' />
           {pagination.next !== null && (
             <button
               type='submit'

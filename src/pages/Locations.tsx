@@ -22,10 +22,15 @@ export const loader =
     const params = Object.fromEntries([
       ...new URL(data.request.url).searchParams.entries(),
     ]);
-    const indexOfSingleLocation = params.location ? Number(params.location) : 0
+
+    const indexOfSingleLocation =
+      params.location && params.page ? Number(params.location) : 0;
 
     const response = await queryClient.ensureQueryData(
-      fetchedLocationsQuery(params)
+      fetchedLocationsQuery({
+        ...params,
+        location: String(indexOfSingleLocation),
+      })
     );
 
     const { info, results } = response.data as {
@@ -34,6 +39,7 @@ export const loader =
     };
 
     const singleLocation = results[indexOfSingleLocation];
+
     const charactersIdInSingleLocation = singleLocation.residents.map(
       (character) => Number(character.substring(42))
     );
