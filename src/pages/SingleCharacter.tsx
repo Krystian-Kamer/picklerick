@@ -81,7 +81,17 @@ const SingleCharacter = () => {
                 gender: <span className='text-2xl '>{gender}</span>
               </p>
               <p className='text-lg py-2'>
-                created: <span className='text-2xl '>{created}</span>
+                created:{' '}
+                <span className='text-2xl '>
+                  {`${new Date(created).getFullYear()}-${(
+                    new Date(created).getMonth() + 1
+                  )
+                    .toString()
+                    .padStart(2, '0')}-${new Date(created)
+                    .getDate()
+                    .toString()
+                    .padStart(2, '0')}`}
+                </span>
               </p>
               {type && (
                 <p className='text-lg py-2'>
