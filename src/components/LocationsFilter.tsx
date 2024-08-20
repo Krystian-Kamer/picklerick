@@ -1,10 +1,12 @@
 import { useLoaderData, Form } from 'react-router-dom';
-import { LocationResponse, Pagination, Location } from '../types';
+import { LocationOrEpisodeResponse, Pagination, Location } from '../types';
 import FormSelect from './FormSelect';
 
 const LocationsFilter = () => {
-  const locations = (useLoaderData() as LocationResponse).results as Location[];
-  const pagination = (useLoaderData() as LocationResponse).info as Pagination;
+  const locations = (useLoaderData() as LocationOrEpisodeResponse)
+    .results as Location[];
+  const pagination = (useLoaderData() as LocationOrEpisodeResponse)
+    .info as Pagination;
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(46)) + 1
     : 1;
