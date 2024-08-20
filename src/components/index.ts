@@ -12,4 +12,5 @@ export { default as EpisodesFilter } from './EpisodesFilter';
 export { default as CharactersContainer } from './CharactersContainer';
 export { default as FormSelect } from './FormSelect';
 export { default as SingleLocation } from './SingleLocation';
+export { default as SingleEpisode } from './SingleEpisode';
 export { default as Loading } from './Loading';

@@ -51,9 +51,20 @@ export type Location = {
   created: string;
 };
 
-export type LocationResponse = {
+export type Episode = {
+  id: number;
+  name: string;
+  url: string;
+  created: string;
+  air_date: string;
+  characters: string[];
+  episode: string;
+};
+
+export type LocationOrEpisodeResponse = {
   results?: Location[];
   info?: Pagination;
   characters: Character[];
   singleLocation?: Location;
+  singleEpisode?: Episode;
 };

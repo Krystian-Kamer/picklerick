@@ -8,15 +8,26 @@ import { customFetch } from '../utils';
 import { Character } from '../types';
 import { Title } from '../components';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
+import { QueryClient } from '@tanstack/react-query';
 
-export const loader = async (data: LoaderFunctionArgs) => {
-  const id = data.params.id as string;
-  const characterResponse = await customFetch(`character/${id}`);
-  const character = characterResponse.data as Character;
-  const paginationResponse = await customFetch('character');
-  const totalCharacters: number = paginationResponse.data.info.count;
-  return { character, totalCharacters };
+const singeCharacterQuery = (id: string) => {
+  return {
+    queryKey: ['singleCharacter', id],
+    queryFn: () => customFetch(`character/${id}`),
+  };
 };
+
+export const loader =
+  (queryClient: QueryClient) => async (data: LoaderFunctionArgs) => {
+    const id = data.params.id as string;
+    const characterResponse = await queryClient.ensureQueryData(
+      singeCharacterQuery(id)
+    );
+    const character = characterResponse.data as Character;
+    const paginationResponse = await customFetch('character');
+    const totalCharacters: number = paginationResponse.data.info.count;
+    return { character, totalCharacters };
+  };
 
 const SingleCharacter = () => {
   const navigate = useNavigate();

@@ -1,19 +1,19 @@
 import { useLoaderData } from 'react-router-dom';
-import { LocationOrEpisodeResponse, Location } from '../types';
+import { LocationOrEpisodeResponse, Episode } from '../types';
 import Title from './Title';
 
-const SingleLocation = () => {
-  const singleLocation = (useLoaderData() as LocationOrEpisodeResponse)
-    .singleLocation as Location;
+const SingleEpisode = () => {
+  const singleEpisode = (useLoaderData() as LocationOrEpisodeResponse)
+    .singleEpisode as Episode;
 
-  const { name, type, dimension, created } = singleLocation;
+  const { name, created, air_date, episode } = singleEpisode;
 
   return (
     <>
       <Title title={name} />
       <div className='flex flex-col bg-slate-900 text-white rounded-3xl mb-10 mx-5 text-2xl'>
-        <p className='ml-10 my-4'>Type : {type}</p>
-        <p className='ml-10 my-4'>Dimension : {dimension}</p>
+        <p className='ml-10 my-4'>Episode: {episode}</p>
+        <p className='ml-10 my-4'>Air date: {air_date}</p>
         <p className='ml-10 my-4'>
           Created :{' '}
           {`${new Date(created).getFullYear()}-${(
@@ -29,4 +29,4 @@ const SingleLocation = () => {
     </>
   );
 };
-export default SingleLocation;
+export default SingleEpisode;

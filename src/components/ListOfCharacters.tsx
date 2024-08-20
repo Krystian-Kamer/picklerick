@@ -1,8 +1,8 @@
 import { useLoaderData, Link } from 'react-router-dom';
-import { LocationResponse } from '../types';
+import { LocationOrEpisodeResponse } from '../types';
 
 const ListOfCharacters = () => {
-  const response = useLoaderData() as LocationResponse;
+  const response = useLoaderData() as LocationOrEpisodeResponse;
   const { characters } = response;
 
   const charactersArray = Array.isArray(characters) ? characters : [characters];
@@ -36,7 +36,9 @@ const ListOfCharacters = () => {
         {charactersArray.length === 1 &&
           charactersArray[0].name === 'Rick Sanchez' && (
             <p className='text-2xl sm:text-2xl lg:text-3xl ml-8 mb-10 lg:w-[600px] font-semibold self-center'>
-              Morty, if you see me here, that means <span className='underline'>this location is empty.</span> Im'here only to tell you about this.
+              Morty, if you see me here, that means{' '}
+              <span className='underline'>this location is empty.</span> Im'here
+              only to tell you about this.
             </p>
           )}
       </div>

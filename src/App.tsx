@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: 'characters/:id',
         element: <SingleCharacter />,
-        loader: singleCharacterLoader,
+        loader: singleCharacterLoader(queryClient)
       },
       {
         path: 'locations',
