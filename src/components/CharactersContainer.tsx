@@ -3,7 +3,6 @@ import { CharacterResponse } from '../types';
 
 const CharactersContainer = () => {
   const characters = (useLoaderData() as CharacterResponse).results;
-
   return (
     <div className='grid sm:grid-cols-2'>
       {characters.map((character) => {

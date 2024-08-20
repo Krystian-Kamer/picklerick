@@ -24,8 +24,7 @@ export const loader =
     ]);
 
     const indexOfSingleLocation =
-      params.location && params.page ? Number(params.location) : 0;
-
+      params.location && params.page ? Number(params.location) : 1;
     const response = await queryClient.ensureQueryData(
       fetchedLocationsQuery({
         ...params,
@@ -38,7 +37,7 @@ export const loader =
       results: Location[];
     };
 
-    const singleLocation = results[indexOfSingleLocation];
+    const singleLocation = results[indexOfSingleLocation-1];
 
     const charactersIdInSingleLocation = singleLocation.residents.map(
       (character) => Number(character.substring(42))

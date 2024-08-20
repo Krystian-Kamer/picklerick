@@ -13,4 +13,4 @@ export const getRandomCharacters = () => {
   return ranges.map(
     (range, index) => Math.floor(Math.random() * range) + offsets[index]
   );
-};
+}

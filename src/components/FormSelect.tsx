@@ -13,7 +13,7 @@ const handleSelectChange = () => {
 const FormSelect = ({ data, name }: FormProps & { name: string }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const idOfLocation: string = searchParams?.get('location') ?? '0';
+  const idOfLocation: string = searchParams?.get('location') ?? '1';
 
   return (
     <select
@@ -25,7 +25,7 @@ const FormSelect = ({ data, name }: FormProps & { name: string }) => {
       {data.map((item, index) => {
         const { id, name } = item;
         return (
-          <option key={id} value={index}>
+          <option key={id} value={index+1}>
             {id} - {name}
           </option>
         );

@@ -1,4 +1,9 @@
-import { LoaderFunctionArgs, useLoaderData, Link } from 'react-router-dom';
+import {
+  LoaderFunctionArgs,
+  useLoaderData,
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 import { customFetch } from '../utils';
 import { Character } from '../types';
 import { Title } from '../components';
@@ -14,6 +19,7 @@ export const loader = async (data: LoaderFunctionArgs) => {
 };
 
 const SingleCharacter = () => {
+  const navigate = useNavigate();
   const { character, totalCharacters } = useLoaderData() as {
     character: Character;
     totalCharacters: number;
@@ -33,7 +39,14 @@ const SingleCharacter = () => {
     episode,
   } = character;
 
-  console.log(location, origin, episode);
+  const navigateToLocation = (locationURL: string) => {
+    const id = locationURL.substring(41);
+    const page = Number(id) > 20 ? Math.ceil(Number(id) / 20) : 1;
+    const location = Number(id) % 20 === 0 ? 20 : Number(id) % 20;
+    navigate(`/locations?page=${page}&location=${location}`);
+  };
+
+  console.log(episode);
 
   return (
     <>
@@ -99,8 +112,35 @@ const SingleCharacter = () => {
                 </p>
               )}
               <p className='text-lg py-2'>
-                origin: <span className='text-2xl py-10'>WILL BE APPLIED</span>
+                origin:{' '}
+                {origin.name === 'unknown' ? (
+                  <span className='text-2xl capitalize'>{origin.name}</span>
+                ) : (
+                  <button
+                    className='text-2xl'
+                    onClick={() => navigateToLocation(origin.url)}
+                  >
+                    {' '}
+                    {origin.name}
+                  </button>
+                )}
               </p>
+
+              <p className='text-lg py-2'>
+                location:{' '}
+                {location.name === 'unknown' ? (
+                  <span className='text-2xl capitalize'>{location.name}</span>
+                ) : (
+                  <button
+                    className='text-2xl'
+                    onClick={() => navigateToLocation(location.url)}
+                  >
+                    {' '}
+                    {location.name}
+                  </button>
+                )}
+              </p>
+
               <p className='text-lg py-2'>
                 episode: <span className='text-2xl'>WILL BE APPLIED</span>
               </p>
