@@ -2,7 +2,6 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {
   Characters,
   SingleCharacter,
-  SingleEpisode,
   Locations,
   Episodes,
   HomeLayout,
