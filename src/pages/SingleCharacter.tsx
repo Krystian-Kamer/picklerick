@@ -50,14 +50,12 @@ const SingleCharacter = () => {
     episode,
   } = character;
 
-  const navigateToLocation = (locationURL: string) => {
-    const id = locationURL.substring(41);
+  const navigateToLocOrEp = (id: string, path: 'location' | 'episode') => {
     const page = Number(id) > 20 ? Math.ceil(Number(id) / 20) : 1;
-    const location = Number(id) % 20 === 0 ? 20 : Number(id) % 20;
-    navigate(`/locations?page=${page}&location=${location}`);
-  };
+    const paramId = Number(id) % 20 === 0 ? 20 : Number(id) % 20;
 
-  console.log(episode);
+    navigate(`/${path}s?page=${page}&${path}=${paramId}`);
+  };
 
   return (
     <>
@@ -127,13 +125,23 @@ const SingleCharacter = () => {
                 {origin.name === 'unknown' ? (
                   <span className='text-2xl capitalize'>{origin.name}</span>
                 ) : (
-                  <button
-                    className='text-2xl'
-                    onClick={() => navigateToLocation(origin.url)}
+                  <span
+                    role='button'
+                    tabIndex={0}
+                    className='text-2xl break-all'
+                    onClick={() =>
+                      navigateToLocOrEp(origin.url.substring(41), 'location')
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        navigateToLocOrEp(origin.url.substring(41), 'location');
+                      }
+                    }}
+                    aria-label={`Navigate to ${origin.name}`}
                   >
                     {' '}
                     {origin.name}
-                  </button>
+                  </span>
                 )}
               </p>
 
@@ -142,18 +150,41 @@ const SingleCharacter = () => {
                 {location.name === 'unknown' ? (
                   <span className='text-2xl capitalize'>{location.name}</span>
                 ) : (
-                  <button
-                    className='text-2xl'
-                    onClick={() => navigateToLocation(location.url)}
+                  <span
+                    role='button'
+                    tabIndex={0}
+                    aria-label={`Navigate to ${origin.name}`}
+                    className='text-2xl break-all '
+                    onClick={() =>
+                      navigateToLocOrEp(location.url.substring(41), 'location')
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        navigateToLocOrEp(origin.url.substring(41), 'location');
+                      }
+                    }}
                   >
                     {' '}
                     {location.name}
-                  </button>
+                  </span>
                 )}
               </p>
 
               <p className='text-lg py-2'>
-                episode: <span className='text-2xl'>WILL BE APPLIED</span>
+                episode:{' '}
+                {episode.map((singleEpisode) => {
+                  const episodeId = singleEpisode.substring(40);
+                  return (
+                    <button
+                      key={episodeId}
+                      className='text-2xl px-1 '
+                      onClick={() => navigateToLocOrEp(episodeId, 'episode')}
+                    >
+                      {' '}
+                      {episodeId}
+                    </button>
+                  );
+                })}
               </p>
             </div>
           </div>

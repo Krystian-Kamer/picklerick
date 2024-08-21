@@ -41,15 +41,18 @@ const router = createBrowserRouter([
       {
         path: 'characters/:id',
         element: <SingleCharacter />,
-        loader: singleCharacterLoader(queryClient)
+        loader: singleCharacterLoader(queryClient),
       },
       {
         path: 'locations',
         element: <Locations />,
         loader: locationsLoader(queryClient),
       },
-      { path: 'episodes', element: <Episodes />, loader: episodesLoader },
-      { path: 'episodes/:id', element: <SingleEpisode /> },
+      {
+        path: 'episodes',
+        element: <Episodes />,
+        loader: episodesLoader(queryClient),
+      },
     ],
   },
 ]);

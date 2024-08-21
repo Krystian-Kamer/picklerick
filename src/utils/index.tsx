@@ -14,3 +14,10 @@ export const getRandomCharacters = () => {
     (range, index) => Math.floor(Math.random() * range) + offsets[index]
   );
 }
+
+  export const setLocOrEpParamToFirst = () => {
+    const selectElement = document.querySelector(
+      '.select'
+    ) as HTMLSelectElement;
+    selectElement.value = '1';
+  };

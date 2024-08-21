@@ -62,7 +62,7 @@ export type Episode = {
 };
 
 export type LocationOrEpisodeResponse = {
-  results?: Location[];
+  results?: Location[] | Episode[];
   info?: Pagination;
   characters: Character[];
   singleLocation?: Location;

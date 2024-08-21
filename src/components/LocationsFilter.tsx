@@ -1,6 +1,7 @@
 import { useLoaderData, Form } from 'react-router-dom';
 import { LocationOrEpisodeResponse, Pagination, Location } from '../types';
 import FormSelect from './FormSelect';
+import { setLocOrEpParamToFirst } from '../utils';
 
 const LocationsFilter = () => {
   const locations = (useLoaderData() as LocationOrEpisodeResponse)
@@ -10,13 +11,6 @@ const LocationsFilter = () => {
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(46)) + 1
     : 1;
-
-  const setLocationToFirst = () => {
-    const selectLocation = document.querySelector(
-      '.selectLocation'
-    ) as HTMLSelectElement;
-    selectLocation.value = '1';
-  };
 
   return (
     <Form className='flex flex-col items-center bg-slate-900 text-white rounded-3xl mb-10 mx-4 selection:text-lime-200'>
@@ -30,7 +24,7 @@ const LocationsFilter = () => {
               type='submit'
               name='page'
               value={currentPage - 1}
-              onClick={() => setLocationToFirst()}
+              onClick={() => setLocOrEpParamToFirst()}
               className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3'
             >
               page {currentPage - 1}
@@ -48,7 +42,7 @@ const LocationsFilter = () => {
               type='submit'
               name='page'
               value={currentPage + 1}
-              onClick={() => setLocationToFirst()}
+              onClick={() => setLocOrEpParamToFirst()}
               className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3'
             >
               page {currentPage + 1}
