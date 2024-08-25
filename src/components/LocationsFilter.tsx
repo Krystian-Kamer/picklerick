@@ -13,9 +13,9 @@ const LocationsFilter = () => {
     : 1;
 
   return (
-    <Form className='flex flex-col items-center bg-slate-900 text-white rounded-3xl mb-10 mx-4 selection:text-lime-200'>
+    <Form className='flex flex-col items-center bg-slate-900 text-white rounded-3xl p-4 sm:p-0 mb-10 mx-4 selection:text-lime-200'>
       <div>
-        <h2 className='text-xl md:text-2xl lg:text-4xl font-semibold py-8 px-4'>
+        <h2 className='text-2xl lg:text-4xl font-semibold py-8 sm:px-4 selection:text-lime-200'>
           Find location for your vacation
         </h2>
         <div className='flex flex-col lg:flex-row gap-x-5 justify-center items-center gap-y-5 mb-10'>

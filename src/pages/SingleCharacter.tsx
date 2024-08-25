@@ -6,8 +6,7 @@ import {
 } from 'react-router-dom';
 import { customFetch } from '../utils';
 import { Character } from '../types';
-import { Title } from '../components';
-import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
+import { Title, PrevButton, NextButton } from '../components';
 import { QueryClient } from '@tanstack/react-query';
 
 const singeCharacterQuery = (id: string) => {
@@ -189,25 +188,9 @@ const SingleCharacter = () => {
             </div>
           </div>
         </article>
-        <div className='flex items-center justify-center gap-10 mb-20'>
-          {id > 1 && (
-            <Link
-              to={`/characters/${id - 1}`}
-              className='flex items-center py-2 px-4 lg:px-4 w-fit  sm:gap-x-1 bg-slate-900 text-lime-200 rounded-3xl hover:scale-105 duration-500 uppercase'
-            >
-              <GrFormPrevious className='w-14 h-14 lg:w-12 lg:h-12' />
-              <span className='text-xl tracking-wider'>prev</span>
-            </Link>
-          )}
-          {id < totalCharacters && (
-            <Link
-              to={`/characters/${id + 1}`}
-              className='flex items-center py-2 px-4  lg:px-4 w-fit sm:gap-x-1 bg-slate-900 text-lime-200 rounded-3xl hover:scale-105 duration-500 uppercase'
-            >
-              <span className='text-xl tracking-wider'>next</span>
-              <GrFormNext className='w-14 h-14 lg:w-12 lg:h-12' />
-            </Link>
-          )}
+        <div className='flex items-center justify-center gap-x-10 mb-24'>
+          {id > 1 && <PrevButton page={id} path='character' />}
+          {id < totalCharacters && <NextButton page={id} path='character' />}
         </div>
       </div>
     </>

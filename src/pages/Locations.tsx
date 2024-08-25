@@ -3,11 +3,13 @@ import {
   Title,
   SingleLocation,
   ListOfCharacters,
+  PrevButton,
+  NextButton,
 } from '../components';
 import { customFetch } from '../utils';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
-import type { Pagination, Location } from '../types';
-import { LoaderFunctionArgs, Params } from 'react-router-dom';
+import type { Pagination, Location, LocationOrEpisodeResponse } from '../types';
+import { LoaderFunctionArgs, Params, useLoaderData } from 'react-router-dom';
 
 const fetchedLocationsQuery = (queryParams: Params) => {
   const { location, page } = queryParams;
@@ -37,7 +39,7 @@ export const loader =
       results: Location[];
     };
 
-    const singleLocation = results[indexOfSingleLocation-1];
+    const singleLocation = results[indexOfSingleLocation - 1];
 
     const charactersIdInSingleLocation = singleLocation.residents.map(
       (character) => Number(character.substring(42))
@@ -57,6 +59,12 @@ export const loader =
   };
 
 const Locations = () => {
+  const pagination = (useLoaderData() as LocationOrEpisodeResponse)
+    .info as Pagination;
+  const currentPage = pagination.prev
+    ? Number(pagination.prev.substring(46)) + 1
+    : 1;
+
   return (
     <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400'>
       <article className='min-h-96 max-w-7xl mx-auto'>
@@ -65,6 +73,10 @@ const Locations = () => {
         <SingleLocation />
         <Title title='residents' />
         <ListOfCharacters />
+        <div className='flex items-center justify-center gap-x-10 mb-24'>
+          <PrevButton page={currentPage} path='location' />
+          <NextButton page={currentPage} path='location' />
+        </div>
       </article>
     </div>
   );

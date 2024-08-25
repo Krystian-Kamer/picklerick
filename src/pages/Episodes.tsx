@@ -3,10 +3,12 @@ import {
   Title,
   ListOfCharacters,
   SingleEpisode,
+  PrevButton,
+  NextButton,
 } from '../components';
 import { customFetch } from '../utils';
-import type { Pagination, Episode } from '../types';
-import { LoaderFunctionArgs, Params } from 'react-router-dom';
+import type { Pagination, Episode, LocationOrEpisodeResponse } from '../types';
+import { LoaderFunctionArgs, Params, useLoaderData } from 'react-router-dom';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 
 const fetchedEpisodesQuery = (queryParams: Params) => {
@@ -38,7 +40,7 @@ export const loader =
       results: Episode[];
     };
 
-    const singleEpisode = results[indexOfSingleEpisode -1];
+    const singleEpisode = results[indexOfSingleEpisode - 1];
 
     const charactersIdInSingleEpisode = singleEpisode.characters.map(
       (character) => Number(character.substring(42))
@@ -59,6 +61,12 @@ export const loader =
   };
 
 const Episodes = () => {
+  const pagination = (useLoaderData() as LocationOrEpisodeResponse)
+    .info as Pagination;
+  const currentPage = pagination.prev
+    ? Number(pagination.prev.substring(45)) + 1
+    : 1;
+
   return (
     <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400'>
       <article className='min-h-96 max-w-7xl mx-auto'>
@@ -67,6 +75,10 @@ const Episodes = () => {
         <SingleEpisode />
         <Title title='characters' />
         <ListOfCharacters />
+        <div className='flex items-center justify-center gap-x-10 mb-24'>
+          <PrevButton page={currentPage} path='episode' />
+          <NextButton page={currentPage} path='episode' />
+        </div>
       </article>
     </div>
   );
