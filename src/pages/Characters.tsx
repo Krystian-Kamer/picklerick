@@ -46,7 +46,7 @@ export const loader =
         toast.warning('Morty find someone who exist in my database');
         return await getResponseData({ name: '' });
       } else {
-        toast.warning('Morty find someone who exist in my database');
+        toast.warning('Morty, find someone who exist in my database');
         return await getResponseData({ name: '' });
       }
     }

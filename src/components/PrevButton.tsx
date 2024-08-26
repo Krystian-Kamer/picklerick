@@ -1,14 +1,20 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { GrFormPrevious } from 'react-icons/gr';
-import { LocationOrEpisodeResponse } from '../types';
+import { LoaderDataResponse } from '../types';
+
 type Params = {
   page: number;
   path: 'character' | 'location' | 'episode';
 };
 
 const PrevButton = ({ page, path }: Params) => {
-  const data = useLoaderData() as LocationOrEpisodeResponse;
-  const itemId = data.singleLocation?.id ?? data.singleEpisode?.id;
+  const response = useLoaderData() as LoaderDataResponse;
+  const itemId =
+    'singleLocation' in response
+      ? response.singleLocation.id
+      : 'singleEpisode' in response
+      ? response.singleEpisode.id
+      : null;
   const paramId = Number(itemId) % 20 === 0 ? 20 : Number(itemId) % 20;
 
   return (

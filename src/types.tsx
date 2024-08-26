@@ -36,11 +36,6 @@ export type Pagination = {
   pages: number;
 };
 
-export type CharacterResponse = {
-  results: Character[];
-  info: Pagination;
-};
-
 export type Location = {
   id: number;
   name: string;
@@ -61,10 +56,30 @@ export type Episode = {
   episode: string;
 };
 
-export type LocationOrEpisodeResponse = {
-  results?: Location[] | Episode[];
-  info?: Pagination;
-  characters: Character[];
-  singleLocation?: Location;
-  singleEpisode?: Episode;
+export type CharacterResponse = {
+  results: Character[];
+  info: Pagination;
 };
+
+type RandomCharacterResponse = {
+  characters: Character[];
+};
+
+export type LocationResponse = {
+  results: Location[];
+  info: Pagination;
+  characters: Character[];
+  singleLocation: Location;
+};
+
+export type EpisodeResponse = {
+  results: Episode[];
+  info: Pagination;
+  characters: Character[];
+  singleEpisode: Episode;
+};
+
+export type LoaderDataResponse =
+  | RandomCharacterResponse
+  | LocationResponse
+  | EpisodeResponse 

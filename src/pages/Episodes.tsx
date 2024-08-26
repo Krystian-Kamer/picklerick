@@ -7,7 +7,7 @@ import {
   NextButton,
 } from '../components';
 import { customFetch } from '../utils';
-import type { Pagination, Episode, LocationOrEpisodeResponse } from '../types';
+import type { Pagination, Episode, EpisodeResponse } from '../types';
 import { LoaderFunctionArgs, Params, useLoaderData } from 'react-router-dom';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 
@@ -61,7 +61,7 @@ export const loader =
   };
 
 const Episodes = () => {
-  const pagination = (useLoaderData() as LocationOrEpisodeResponse)
+  const pagination = (useLoaderData() as EpisodeResponse)
     .info as Pagination;
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(45)) + 1

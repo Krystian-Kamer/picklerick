@@ -1,8 +1,8 @@
 import { useLoaderData, Link } from 'react-router-dom';
-import { LocationOrEpisodeResponse } from '../types';
+import { LoaderDataResponse } from '../types';
 
 const ListOfCharacters = () => {
-  const response = useLoaderData() as LocationOrEpisodeResponse;
+  const response = useLoaderData() as LoaderDataResponse
   const { characters } = response;
 
   const charactersArray = Array.isArray(characters) ? characters : [characters];

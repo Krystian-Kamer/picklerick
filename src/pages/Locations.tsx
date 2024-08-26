@@ -8,7 +8,7 @@ import {
 } from '../components';
 import { customFetch } from '../utils';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
-import type { Pagination, Location, LocationOrEpisodeResponse } from '../types';
+import type { Pagination, Location, LocationResponse } from '../types';
 import { LoaderFunctionArgs, Params, useLoaderData } from 'react-router-dom';
 
 const fetchedLocationsQuery = (queryParams: Params) => {
@@ -59,8 +59,7 @@ export const loader =
   };
 
 const Locations = () => {
-  const pagination = (useLoaderData() as LocationOrEpisodeResponse)
-    .info as Pagination;
+  const pagination = (useLoaderData() as LocationResponse).info as Pagination;
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(46)) + 1
     : 1;

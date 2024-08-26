@@ -1,9 +1,9 @@
 import { useLoaderData } from 'react-router-dom';
-import { LocationOrEpisodeResponse, Episode } from '../types';
+import { EpisodeResponse, Episode } from '../types';
 import Title from './Title';
 
 const SingleEpisode = () => {
-  const singleEpisode = (useLoaderData() as LocationOrEpisodeResponse)
+  const singleEpisode = (useLoaderData() as EpisodeResponse)
     .singleEpisode as Episode;
 
   const { name, created, air_date, episode } = singleEpisode;

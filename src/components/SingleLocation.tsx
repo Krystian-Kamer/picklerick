@@ -1,9 +1,9 @@
 import { useLoaderData } from 'react-router-dom';
-import { LocationOrEpisodeResponse, Location } from '../types';
+import { LocationResponse, Location } from '../types';
 import Title from './Title';
 
 const SingleLocation = () => {
-  const singleLocation = (useLoaderData() as LocationOrEpisodeResponse)
+  const singleLocation = (useLoaderData() as LocationResponse)
     .singleLocation as Location;
 
   const { name, type, dimension, created } = singleLocation;

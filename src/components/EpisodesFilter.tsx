@@ -1,12 +1,12 @@
 import { useLoaderData, Form } from 'react-router-dom';
-import { LocationOrEpisodeResponse, Pagination, Episode } from '../types';
+import { EpisodeResponse, Pagination, Episode } from '../types';
 import FormSelect from './FormSelect';
 import { setLocOrEpParamToFirst } from '../utils';
 
 const EpisodesFilter = () => {
-  const episodes = (useLoaderData() as LocationOrEpisodeResponse)
+  const episodes = (useLoaderData() as EpisodeResponse)
     .results as Episode[];
-  const pagination = (useLoaderData() as LocationOrEpisodeResponse)
+  const pagination = (useLoaderData() as EpisodeResponse)
     .info as Pagination;
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(45)) + 1
