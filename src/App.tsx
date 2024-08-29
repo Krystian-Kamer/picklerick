@@ -11,7 +11,7 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import { loader as charactersLoader } from './pages/Characters';
+import { loader as characterLoader } from './pages/Characters';
 import { loader as locationsLoader } from './pages/Locations';
 import { loader as episodesLoader } from './pages/Episodes';
 import { loader as landingLoader } from './pages/Landing';
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       {
         path: 'characters',
         element: <Characters />,
-        loader: charactersLoader(queryClient),
+        loader: characterLoader,
       },
       {
         path: 'characters/:id',

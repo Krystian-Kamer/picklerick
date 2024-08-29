@@ -56,13 +56,14 @@ export type Episode = {
   episode: string;
 };
 
-export type CharacterResponse = {
-  results: Character[];
-  info: Pagination;
-};
-
 type RandomCharacterResponse = {
   characters: Character[];
+};
+
+export type CharacterParams = {
+  name: string;
+  gender: string;
+  status: string;
 };
 
 export type LocationResponse = {
@@ -82,4 +83,4 @@ export type EpisodeResponse = {
 export type LoaderDataResponse =
   | RandomCharacterResponse
   | LocationResponse
-  | EpisodeResponse 
+  | EpisodeResponse;
