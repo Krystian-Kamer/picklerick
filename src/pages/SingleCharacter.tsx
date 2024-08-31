@@ -58,9 +58,9 @@ const SingleCharacter = () => {
 
   return (
     <>
-      <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400'>
-        <div className='max-w-7xl mx-auto mt-10 pl-10 sm:text-xl'>
-          <Link className='font-semibold' to='/'>
+      <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400 '>
+        <div className='max-w-7xl mx-auto mt-10 pl-10 sm:text-xl selection:bg-slate-800 selection:text-lime-200'>
+          <Link className='font-semibold ' to='/'>
             Home
           </Link>
           <span className='tracking-tighter'>{`${'>>'}`}</span>
@@ -69,7 +69,7 @@ const SingleCharacter = () => {
           </Link>
         </div>
 
-        <article className='flex flex-col max-w-7xl mx-auto justify-center py-16'>
+        <article className='flex flex-col max-w-7xl mx-auto justify-center py-16 selection:bg-slate-800 selection:text-lime-200'>
           <Title title={name} />
           <div className='bg-slate-900 flex flex-col md:flex-row p-10 sm:m-6 sm:rounded-3xl mt-5 text-white text-2xl'>
             <img
@@ -127,7 +127,7 @@ const SingleCharacter = () => {
                   <span
                     role='button'
                     tabIndex={0}
-                    className='text-2xl break-all'
+                    className='text-2xl break-all border-b-2 border-sky-200'
                     onClick={() =>
                       navigateToLocOrEp(origin.url.substring(41), 'location')
                     }
@@ -153,7 +153,7 @@ const SingleCharacter = () => {
                     role='button'
                     tabIndex={0}
                     aria-label={`Navigate to ${origin.name}`}
-                    className='text-2xl break-all '
+                    className='text-2xl break-all border-b-2 border-sky-200'
                     onClick={() =>
                       navigateToLocOrEp(location.url.substring(41), 'location')
                     }
@@ -176,7 +176,7 @@ const SingleCharacter = () => {
                   return (
                     <button
                       key={episodeId}
-                      className='text-2xl px-1 '
+                      className='text-2xl px-1 underline'
                       onClick={() => navigateToLocOrEp(episodeId, 'episode')}
                     >
                       {' '}
