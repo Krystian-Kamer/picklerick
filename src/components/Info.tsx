@@ -10,10 +10,10 @@ const Info = () => {
         alt='image of Pickle Rick'
       />
       <div className='mx-3 lg:max-w-full text-slate-900'>
-        <h2 className='text-3xl md:text-4xl font-semibold '>
+        <h2 className='text-3xl md:text-4xl font-semibold selection:bg-slate-900 selection:text-lime-200'>
           Welcome in my dimension.
         </h2>
-        <p className='text-2xl py-8'>
+        <p className='text-2xl py-8 selection:bg-slate-900 selection:text-lime-200'>
           My name is Pickle Rick. So I explain to you quickly, Morty, how this
           page works. Page is created by my slave - Krystian. This is a project
           created by him to test his skills, but mostly, because I gave him that

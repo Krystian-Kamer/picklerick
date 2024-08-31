@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import type { Pagination, CharacterParams } from '../types';
+import type { CharacterParams } from '../types';
 import { customFetch } from '../utils';
-import Loading from './Loading';
+import { Loading, Title } from './../components/index';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import { useLoaderData } from 'react-router-dom';
 
 const CharactersContainer = () => {
   const params = useLoaderData() as CharacterParams;
@@ -19,16 +18,15 @@ const CharactersContainer = () => {
         params.gender ?? '',
         params.status ?? '',
       ],
-      queryFn: async ({pageParam}) => {
+      queryFn: async ({ pageParam }) => {
         const response = await customFetch('/character', {
           params: { ...params, page: pageParam },
         });
         return response;
       },
       getNextPageParam: (lastPage) => {
-        const { info } = lastPage.data as { info: Pagination };
-        const nextPage = info.next
-          ? new URL(info.next).searchParams.get('page')
+        const nextPage = lastPage.data?.info?.next
+          ? new URL(lastPage.data.info.next).searchParams.get('page')
           : null;
         return nextPage ? Number(nextPage) : undefined;
       },
@@ -48,11 +46,12 @@ const CharactersContainer = () => {
         It appears that the character you are looking for does not exist.
       </h2>
     );
-
-  const characters = data.pages.flatMap((page) => page.data.results)
+  console.log(data);
+  const characters = data.pages.flatMap((page) => page.data.results);
 
   return (
     <div>
+      <Title title='Results' />
       <div className='grid sm:grid-cols-2'>
         {characters.map((character) => {
           const { id, image, name, species, status, location } = character;
@@ -69,14 +68,14 @@ const CharactersContainer = () => {
                   src={image}
                   alt={name}
                   className='h-full w-full object-cover 
-                  group-hover:scale-105 duration-700'
+                  group-hover:scale-105 duration-700 '
                 />
               </Link>
-              <div className='p-4 relative'>
-                <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline selection:text-lime-200'>
+              <div className='p-4 relative selection:bg-slate-800 selection:text-lime-200'>
+                <p className='text-2xl uppercase font-bold tracking-widest border-b-2 leading-relaxed border-b-lime-200 inline '>
                   {name}
                 </p>
-                <p className='text-lg selection:text-lime-200'>
+                <p className='text-lg '>
                   status:{' '}
                   <span
                     className={
@@ -90,10 +89,10 @@ const CharactersContainer = () => {
                     {status}
                   </span>
                 </p>
-                <p className='text-lg selection:text-lime-200'>
+                <p className='text-lg '>
                   species: <span className='text-2xl'>{species}</span>
                 </p>
-                <p className='text-lg mb-6 selection:text-lime-200'>
+                <p className='text-lg mb-6 '>
                   location:{' '}
                   <span className='text-2xl py-10'>{location.name}</span>
                 </p>
@@ -108,7 +107,7 @@ const CharactersContainer = () => {
           );
         })}
       </div>
-      {hasNextPage && <div ref={ref}></div>}
+      {hasNextPage ? <div ref={ref}></div> : <Title title='end of results' />}
       {isFetchingNextPage && <Loading />}
     </div>
   );

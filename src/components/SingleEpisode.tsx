@@ -11,7 +11,7 @@ const SingleEpisode = () => {
   return (
     <>
       <Title title={name} />
-      <div className='flex flex-col bg-slate-900 text-white rounded-3xl mb-10 mx-5 text-lg sm:text-2xl'>
+      <div className='flex flex-col bg-slate-900 text-white rounded-3xl mb-10 mx-5 text-lg sm:text-2xl selection:bg-slate-800 selection:text-lime-200'>
         <p className='px-4 my-4'>Episode: {episode}</p>
         <p className='px-4 my-4'>Air date: {air_date}</p>
         <p className='px-4 my-4'>

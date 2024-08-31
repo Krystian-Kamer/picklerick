@@ -25,7 +25,7 @@ const contactInfo = [
 const Footer = () => {
   return (
     <div className='w-full bg-slate-900'>
-      <div className='grid sm:grid-cols-2 max-w-7xl mx-auto justify-evenly py-3 text-white selection:text-lime-200 my-10 p-8 sm:px-6 md:px-10 gap-x-6 sm:gap-x-2 md:gap-x-6'>
+      <div className='grid sm:grid-cols-2 max-w-7xl mx-auto justify-evenly py-3 text-white selection:bg-slate-800 selection:text-lime-200 my-10 p-8 sm:px-6 md:px-10 gap-x-6 sm:gap-x-2 md:gap-x-6'>
         <div className='mb-6'>
           <h2 className='text-2xl mb-4'>About me</h2>
           <p>
@@ -36,7 +36,7 @@ const Footer = () => {
         </div>
         <div>
           <h2 className='text-2xl mb-4'>Contact</h2>
-          <div className='grid md:grid-cols-2'> 
+          <div className='grid md:grid-cols-2'>
             {contactInfo.map((tool) => {
               const { Icon, name, href } = tool;
               return (

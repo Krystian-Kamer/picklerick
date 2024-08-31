@@ -13,7 +13,7 @@ const images: Category[] = [
 const Categories = () => {
   return (
     <div className='flex flex-col items-center bg-slate-900 text-white rounded-3xl mb-10 mx-4'>
-      <h2 className='text-xl md:text-2xl lg:text-4xl font-semibold py-8 px-4'>
+      <h2 className='text-xl md:text-2xl lg:text-4xl font-semibold py-8 px-4 selection:bg-slate-800 selection:text-lime-200'>
         You can explore this page by choosing one of 3 category:
       </h2>
       <div className='grid sm:grid-cols-2 lg:grid-cols-3'>
