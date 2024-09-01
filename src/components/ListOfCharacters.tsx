@@ -4,7 +4,6 @@ import { LoaderDataResponse } from '../types';
 const ListOfCharacters = () => {
   const response = useLoaderData() as LoaderDataResponse
   const { characters } = response;
-
   const charactersArray = Array.isArray(characters) ? characters : [characters];
 
   return (

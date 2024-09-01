@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 const CharactersContainer = () => {
   const params = useLoaderData() as CharacterParams;
-  const { ref, inView } = useInView();
+  const { ref: pageRef, inView: pageIsVisible } = useInView();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
@@ -34,10 +34,10 @@ const CharactersContainer = () => {
     });
 
   useEffect(() => {
-    if (inView) {
+    if (pageIsVisible) {
       fetchNextPage();
     }
-  }, [fetchNextPage, inView]);
+  }, [fetchNextPage, pageIsVisible]);
 
   if (status === 'pending') return <Loading />;
   if (status === 'error')
@@ -46,7 +46,6 @@ const CharactersContainer = () => {
         It appears that the character you are looking for does not exist.
       </h2>
     );
-  console.log(data);
   const characters = data.pages.flatMap((page) => page.data.results);
 
   return (
@@ -58,7 +57,7 @@ const CharactersContainer = () => {
           return (
             <div
               key={id}
-              className='rounded-3xl overflow-hidden flex flex-col lg:flex-row border-4 border-slate-900 bg-slate-900 text-white m-10 relative group'
+              className='rounded-3xl overflow-hidden flex flex-col lg:flex-row border-4 border-slate-900 bg-slate-900 text-white m-10 relative group '
             >
               <Link
                 to={`/characters/${id}`}
@@ -107,7 +106,11 @@ const CharactersContainer = () => {
           );
         })}
       </div>
-      {hasNextPage ? <div ref={ref}></div> : <Title title='end of results' />}
+      {hasNextPage ? (
+        <div ref={pageRef}></div>
+      ) : (
+        <Title title='end of results' />
+      )}
       {isFetchingNextPage && <Loading />}
     </div>
   );

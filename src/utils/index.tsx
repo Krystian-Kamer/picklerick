@@ -13,11 +13,16 @@ export const getRandomCharacters = () => {
   return ranges.map(
     (range, index) => Math.floor(Math.random() * range) + offsets[index]
   );
-}
+};
 
-  export const setLocOrEpParamToFirst = () => {
-    const selectElement = document.querySelector(
-      '.select'
-    ) as HTMLSelectElement;
-    selectElement.value = '1';
-  };
+export const setLocOrEpParamToFirst = () => {
+  const selectElement = document.querySelector('.select') as HTMLSelectElement;
+  selectElement.value = '1';
+};
+
+export const scrollToTop = () => {
+  window.scroll({
+    top: 180,
+    behavior: 'smooth',
+  });
+};

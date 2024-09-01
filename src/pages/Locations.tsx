@@ -6,10 +6,11 @@ import {
   PrevButton,
   NextButton,
 } from '../components';
-import { customFetch } from '../utils';
+import { customFetch, scrollToTop } from '../utils';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
 import type { Pagination, Location, LocationResponse } from '../types';
 import { LoaderFunctionArgs, Params, useLoaderData } from 'react-router-dom';
+
 
 const fetchedLocationsQuery = (queryParams: Params) => {
   const { location, page } = queryParams;
@@ -55,6 +56,7 @@ export const loader =
       return response.data;
     };
     const characters = await fetchCharacters();
+    scrollToTop()
     return { info, results, singleLocation, characters };
   };
 

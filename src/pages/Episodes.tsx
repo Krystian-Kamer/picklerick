@@ -6,7 +6,7 @@ import {
   PrevButton,
   NextButton,
 } from '../components';
-import { customFetch } from '../utils';
+import { customFetch, scrollToTop } from '../utils';
 import type { Pagination, Episode, EpisodeResponse } from '../types';
 import { LoaderFunctionArgs, Params, useLoaderData } from 'react-router-dom';
 import { QueryClient, QueryKey } from '@tanstack/react-query';
@@ -56,13 +56,12 @@ export const loader =
       return response.data;
     };
     const characters = await fetchCharacters();
-
+    scrollToTop();
     return { info, results, singleEpisode, characters };
   };
 
 const Episodes = () => {
-  const pagination = (useLoaderData() as EpisodeResponse)
-    .info as Pagination;
+  const pagination = (useLoaderData() as EpisodeResponse).info as Pagination;
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(45)) + 1
     : 1;

@@ -5,7 +5,7 @@ const genders = ['all', 'Male', 'Female', 'Genderless', 'unknown'];
 
 const status = ['all', 'Alive', 'Dead', 'unknown'];
 
-const CharactersFilter = () => {
+const CharactersFilter = ({ scrollToTitle }: { scrollToTitle: () => void }) => {
   return (
     <div className='flex flex-col items-center bg-slate-900 text-white rounded-3xl p-4 sm:p-0 mb-10 mx-4'>
       <div>
@@ -71,6 +71,7 @@ const CharactersFilter = () => {
           <button
             type='submit'
             className='flex items-center p-1 justify-center gap-x-4 bg-lime-200 text-slate-900 rounded-lg hover:scale-105 duration-500 uppercase mt-2 mb-10 selection:bg-lime-200'
+            onClick={() => scrollToTitle()}
           >
             <span className='text-md sm:text-lg lg:text-xl tracking-wider'>
               search

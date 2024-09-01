@@ -7,6 +7,8 @@ import {
   HomeLayout,
   Error,
   Landing,
+  Login,
+  Register,
 } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
         path: 'episodes',
         element: <Episodes />,
         loader: episodesLoader(queryClient),
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
       },
     ],
   },
