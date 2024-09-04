@@ -57,7 +57,7 @@ const CharactersContainer = () => {
           return (
             <div
               key={id}
-              className='rounded-3xl overflow-hidden flex flex-col lg:flex-row border-4 border-slate-900 bg-slate-900 text-white m-10 relative group '
+              className='rounded-3xl overflow-hidden flex flex-col lg:flex-row border-4 border-slate-900 bg-slate-900 text-white m-10 relative group'
             >
               <Link
                 to={`/characters/${id}`}

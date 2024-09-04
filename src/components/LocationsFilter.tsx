@@ -1,13 +1,10 @@
 import { useLoaderData, Form } from 'react-router-dom';
 import { LocationResponse, Pagination, Location } from '../types';
-import FormSelect from './FormSelect';
-import { setLocOrEpParamToFirst } from '../utils';
+import { FormSelect, PageButton } from '../components/index';
 
 const LocationsFilter = () => {
-  const locations = (useLoaderData() as LocationResponse)
-    .results as Location[];
-  const pagination = (useLoaderData() as LocationResponse)
-    .info as Pagination;
+  const locations = (useLoaderData() as LocationResponse).results as Location[];
+  const pagination = (useLoaderData() as LocationResponse).info as Pagination;
   const currentPage = pagination.prev
     ? Number(pagination.prev.substring(46)) + 1
     : 1;
@@ -20,15 +17,7 @@ const LocationsFilter = () => {
         </h2>
         <div className='flex flex-col lg:flex-row gap-x-5 justify-center items-center gap-y-5 mb-10'>
           {pagination.prev !== null && (
-            <button
-              type='submit'
-              name='page'
-              value={currentPage - 1}
-              onClick={() => setLocOrEpParamToFirst()}
-              className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3'
-            >
-              page {currentPage - 1}
-            </button>
+            <PageButton currentPage={currentPage} action='prev' />
           )}
           <FormSelect data={locations} name='location' />
           <button
@@ -38,15 +27,7 @@ const LocationsFilter = () => {
             className='hidden'
           ></button>
           {pagination.next !== null && (
-            <button
-              type='submit'
-              name='page'
-              value={currentPage + 1}
-              onClick={() => setLocOrEpParamToFirst()}
-              className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3'
-            >
-              page {currentPage + 1}
-            </button>
+            <PageButton currentPage={currentPage} action='next' />
           )}
         </div>
       </div>

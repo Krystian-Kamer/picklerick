@@ -22,7 +22,7 @@ export const setLocOrEpParamToFirst = () => {
 
 export const scrollToTop = () => {
   window.scroll({
-    top: 180,
+    top: 190,
     behavior: 'smooth',
   });
 };

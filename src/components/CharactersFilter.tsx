@@ -1,9 +1,7 @@
 import { IoSearch } from 'react-icons/io5';
 import { Form } from 'react-router-dom';
-
-const genders = ['all', 'Male', 'Female', 'Genderless', 'unknown'];
-
-const status = ['all', 'Alive', 'Dead', 'unknown'];
+import FormInput from './FormInput';
+import CharacterFormSelect from './CharacterFormSelect';
 
 const CharactersFilter = ({ scrollToTitle }: { scrollToTitle: () => void }) => {
   return (
@@ -14,60 +12,19 @@ const CharactersFilter = ({ scrollToTitle }: { scrollToTitle: () => void }) => {
         </h2>
         <Form className='flex flex-col w-full'>
           <div className='flex items-center py-2'>
-            <label
-              className='uppercase w-32 selection:bg-slate-800 selection:text-lime-200'
-              htmlFor='name'
-            >
-              By Name
-            </label>
-            <input
-              className='bg-slate-900 border-2 border-lime-200 rounded-lg placeholder-slate-400 focus:outline-none px-4 text-xl w-full selection:text-lime-200 selection:bg-slate-800'
+            <FormInput
+              text='By Name'
               placeholder='Search'
               type='search'
               name='name'
             />
           </div>
           <div className='flex items-center py-2'>
-            <label
-              htmlFor='gender'
-              className='uppercase w-32 selection:bg-slate-800 selection:text-lime-200'
-            >
-              By Gender
-            </label>
-            <select
-              className=' bg-slate-900 border-2 border-lime-200 rounded-lg px-4 text-xl capitalize w-full focus:outline-none'
-              name='gender'
-            >
-              {genders.map((gender) => {
-                return (
-                  <option key={gender} value={gender}>
-                    {gender}
-                  </option>
-                );
-              })}
-            </select>
+            <CharacterFormSelect category='gender' />
           </div>
           <div className='flex  items-center py-2'>
-            <label
-              htmlFor='status'
-              className='uppercase w-32 selection:bg-slate-800 selection:text-lime-200'
-            >
-              By Status
-            </label>
-            <select
-              className='bg-slate-900 border-2 border-lime-200 rounded-lg px-4 text-xl capitalize w-full focus:outline-none'
-              name='status'
-            >
-              {status.map((status) => {
-                return (
-                  <option key={status} value={status}>
-                    {status}
-                  </option>
-                );
-              })}
-            </select>
+            <CharacterFormSelect category='status' />
           </div>
-
           <button
             type='submit'
             className='flex items-center p-1 justify-center gap-x-4 bg-lime-200 text-slate-900 rounded-lg hover:scale-105 duration-500 uppercase mt-2 mb-10 selection:bg-lime-200'

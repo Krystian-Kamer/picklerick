@@ -16,3 +16,6 @@ export { default as SingleEpisode } from './SingleEpisode';
 export { default as Loading } from './Loading';
 export { default as PrevButton } from './PrevButton';
 export { default as NextButton } from './NextButton';
+export { default as PageButton } from './PageButton';
+export { default as FormInput } from './FormInput';
+export { default as CharacterFormSelect } from './CharacterFormSelect';

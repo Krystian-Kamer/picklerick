@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import pixelrick from '../assets/pixelrick.png';
+import { scrollToTop } from '../utils';
 
 const Header = () => {
-  let user : string | undefined;
+  let user: string | undefined;
 
   return (
     <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400'>
@@ -11,7 +12,7 @@ const Header = () => {
           <Link
             to='/'
             className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800'
-            onClick={() => (user = undefined)}
+            onClick={() => scrollToTop()}
           >
             Logout
           </Link>
@@ -19,13 +20,15 @@ const Header = () => {
           <>
             <Link
               to='/login'
-              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800'
+              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 hover:scale-105 duration-700'
+              onClick={() => scrollToTop()}
             >
               Login
             </Link>
             <Link
               to='/register'
-              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800'
+              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 hover:scale-105 duration-700'
+              onClick={() => scrollToTop()}
             >
               Register
             </Link>
@@ -34,7 +37,7 @@ const Header = () => {
       </div>
       <div>
         <div className='flex max-w-7xl mx-auto  sm:justify-evenly items-center py-2'>
-          <Link className='w-32 h-32 hover:scale-105' to='/'>
+          <Link className='w-32 h-32 mb-[10px] hover:scale-110' to='/'>
             <img src={pixelrick} alt='image of pixel Rick' />
           </Link>
           <h1 className='pl-4 sm:pl-0 text-xl sm:text-3xl text-slate-900  font-bold box-decoration-slice selection:bg-slate-900 selection:text-lime-200'>

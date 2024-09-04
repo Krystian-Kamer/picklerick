@@ -13,7 +13,7 @@ const Navbar = () => {
               className='uppercase font-bold text-sm sm:text-lg lg:text-xl hover:scale-105 duration-500 selection:text-lime-300'
               style={
                 link === pathname.substring(1)
-                  ? { color: '#90e771' }
+                  ? { color: 'rgb(217 249 157)' }
                   : { color: 'white' }
               }
               key={link}
