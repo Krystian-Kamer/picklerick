@@ -12,14 +12,16 @@ import {
 } from './pages';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { loader as characterLoader } from './pages/Characters';
 import { loader as locationsLoader } from './pages/Locations';
 import { loader as episodesLoader } from './pages/Episodes';
 import { loader as landingLoader } from './pages/Landing';
 import { loader as singleCharacterLoader } from './pages/SingleCharacter';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { action as registerAction } from './pages/Register';
+import { action as loginAction } from './pages/Login';
 
 const queryClient = new QueryClient();
 
@@ -57,10 +59,12 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+        action: loginAction,
       },
       {
         path: 'register',
         element: <Register />,
+        action: registerAction,
       },
     ],
   },

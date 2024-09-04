@@ -84,3 +84,12 @@ export type LoaderDataResponse =
   | RandomCharacterResponse
   | LocationResponse
   | EpisodeResponse;
+
+export type LoginParams = {
+  email: string;
+  password: string;
+};
+
+export type RegisterParams = LoginParams & {
+  username: string;
+};

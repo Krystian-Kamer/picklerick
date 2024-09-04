@@ -18,10 +18,11 @@ const FormInput = ({
         {text}
       </label>
       <input
-        className='bg-slate-900 border-2 border-lime-200 rounded-lg placeholder-slate-400 focus:outline-none px-4 text-xl w-full selection:text-lime-200 selection:bg-slate-800'
+        className='bg-slate-900 border-2 border-lime-200 rounded-lg placeholder-slate-400 focus:outline-none px-4 text-lg sm:text-xl w-full selection:text-lime-200 selection:bg-slate-800'
         placeholder={placeholder}
         type={type}
         name={name}
+        id={name}
       />
     </>
   );
