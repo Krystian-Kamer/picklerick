@@ -1,13 +1,16 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../reduxHooks';
 
 const Navbar = () => {
-  const links = ['characters', 'locations', 'episodes'];
+  const user = useAppSelector((state) => state.user.username);
+  const links = ['characters', 'locations', 'episodes', 'library'];
   const { pathname } = useLocation();
 
   return (
     <nav className='w-full bg-slate-900'>
       <div className='flex max-w-7xl mx-auto justify-evenly items-center py-3 text-white'>
         {links.map((link) => {
+          if (link === 'library' && !user) return null;
           return (
             <NavLink
               className='uppercase font-bold text-sm sm:text-lg lg:text-xl hover:scale-105 duration-500 selection:text-lime-300'

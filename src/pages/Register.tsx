@@ -4,8 +4,10 @@ import { toast } from 'react-toastify';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  console.log(data);
+  const { email, password, username } = Object.fromEntries(formData);
+  if (!email || !password || !username) {
+    return toast.warn('Please complete all registration fields');
+  }
   try {
     toast.success('Account successfully created');
     return redirect('/login');
@@ -47,7 +49,7 @@ const Register = () => {
           type='submit'
           className='bg-lime-200 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3 hover:scale-105 duration-700'
         >
-          login
+          register
         </button>
         <p>
           Already have an account?{' '}

@@ -85,11 +85,9 @@ export type LoaderDataResponse =
   | LocationResponse
   | EpisodeResponse;
 
-export type LoginParams = {
+export type UserParams = {
   email: string;
   password: string;
-};
-
-export type RegisterParams = LoginParams & {
   username: string;
+  charactersList: number[];
 };
