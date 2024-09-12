@@ -8,6 +8,8 @@ import { customFetch } from '../utils';
 import { Character } from '../types';
 import { Title, PrevButton, NextButton } from '../components';
 import { QueryClient } from '@tanstack/react-query';
+import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5';
+import { useAppSelector } from '../reduxHooks';
 
 const singeCharacterQuery = (id: string) => {
   return {
@@ -34,6 +36,9 @@ const SingleCharacter = () => {
     character: Character;
     totalCharacters: number;
   };
+  const { username, characters: dbCharacters } = useAppSelector(
+    (state) => state.user
+  );
 
   const {
     created,
@@ -49,11 +54,17 @@ const SingleCharacter = () => {
     episode,
   } = character;
 
+  const isCharacterInDbCharacters: boolean = dbCharacters.includes(id);
+
   const navigateToLocOrEp = (id: string, path: 'location' | 'episode') => {
     const page = Number(id) > 20 ? Math.ceil(Number(id) / 20) : 1;
     const paramId = Number(id) % 20 === 0 ? 20 : Number(id) % 20;
 
     navigate(`/${path}s?page=${page}&${path}=${paramId}`);
+  };
+
+  const toggleDbCharacter = () => {
+    console.log(isCharacterInDbCharacters);
   };
 
   return (
@@ -168,7 +179,6 @@ const SingleCharacter = () => {
                   </span>
                 )}
               </p>
-
               <p className='text-lg py-2'>
                 episode:{' '}
                 {episode.map((singleEpisode) => {
@@ -187,6 +197,29 @@ const SingleCharacter = () => {
               </p>
             </div>
           </div>
+
+          {username ? (
+            <button
+              type='button'
+              className='flex items-center mx-auto mt-8 py-1 sm:py-2 px-4 bg-slate-900 text-lime-200 rounded-2xl hover:scale-105 duration-500 uppercase tracking-widest h-14 group '
+              onClick={() => toggleDbCharacter()}
+            >
+              <span className='text-xl'>
+                {isCharacterInDbCharacters
+                  ? 'Remove from Your Library '
+                  : 'Add To Your Library'}
+              </span>
+              {isCharacterInDbCharacters ? (
+                <IoRemoveCircleOutline className='h-8 w-8 ml-2' />
+              ) : (
+                <IoAddCircleOutline className='h-8 w-8 ml-2' />
+              )}
+            </button>
+          ) : (
+            <p className='mt-8 px-8 mx-auto sm:text-lg italic'>
+              You must be logged in to add character to you library
+            </p>
+          )}
         </article>
         <div className='flex items-center justify-center gap-x-10 mb-24'>
           {id > 1 && <PrevButton page={id} path='character' />}

@@ -16,7 +16,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { store } from './store';
-
 import { loader as characterLoader } from './pages/Characters';
 import { loader as locationsLoader } from './pages/Locations';
 import { loader as episodesLoader } from './pages/Episodes';
@@ -67,7 +66,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
-        action: loginAction,
+        action: loginAction(store),
       },
       {
         path: 'register',

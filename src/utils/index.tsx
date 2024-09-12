@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import { UserParams } from '../types';
+import { toast } from 'react-toastify';
+
 const baseURL = 'https://rickandmortyapi.com/api';
 
 export const customFetch = axios.create({
@@ -24,5 +27,19 @@ export const scrollToTop = () => {
   window.scroll({
     top: 190,
     behavior: 'smooth',
+  });
+};
+
+export const isUserAlreadyExist = (usersDatabase: UserParams[], username: string, email: string) => {
+  return usersDatabase.some((user) => {
+    if (user.username === username) {
+      toast.warn('Username is taken, please use a different name');
+      return true;
+    }
+    if (user.email === email) {
+      toast.warn('Email is taken, please use a different email');
+      return true;
+    }
+    return false;
   });
 };

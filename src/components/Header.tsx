@@ -3,6 +3,7 @@ import pixelrick from '../assets/pixelrick.png';
 import { scrollToTop } from '../utils';
 import { useAppSelector, useAppDispatch } from '../reduxHooks';
 import { logout } from '../features/user/userSlice';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const user = useAppSelector((state) => state.user.username);
@@ -15,7 +16,10 @@ const Header = () => {
           <Link
             to='/'
             className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800'
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              toast.success(`${user} logged out successfully`);
+            }}
           >
             Logout
           </Link>

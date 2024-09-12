@@ -89,5 +89,5 @@ export type UserParams = {
   email: string;
   password: string;
   username: string;
-  charactersList: number[];
+  characters: number[];
 };

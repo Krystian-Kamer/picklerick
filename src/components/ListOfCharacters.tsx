@@ -1,11 +1,12 @@
-import { useLoaderData, Link } from 'react-router-dom';
+import { useLoaderData, Link, useLocation } from 'react-router-dom';
 import { LoaderDataResponse } from '../types';
+import { nanoid } from 'nanoid';
 
 const ListOfCharacters = () => {
-  const response = useLoaderData() as LoaderDataResponse
+  const response = useLoaderData() as LoaderDataResponse;
   const { characters } = response;
   const charactersArray = Array.isArray(characters) ? characters : [characters];
-
+  const { pathname } = useLocation();
   return (
     <>
       <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-20 gap-x-4 gap-y-8 justify-center mx-5'>
@@ -13,7 +14,7 @@ const ListOfCharacters = () => {
           const { id, name, image } = character;
           return (
             <Link
-              key={id}
+              key={nanoid()}
               to={`/characters/${id}`}
               className='border-4 border-slate-900 rounded-3xl overflow-hidden relative group'
             >
@@ -36,8 +37,12 @@ const ListOfCharacters = () => {
           charactersArray[0].name === 'Rick Sanchez' && (
             <p className='text-2xl sm:text-2xl lg:text-3xl ml-8 mb-10 lg:w-[600px] font-semibold self-center'>
               Morty, if you see me here, that means{' '}
-              <span className='underline'>this location is empty.</span> Im'here
-              only to tell you about this.
+              <span className='underline'>
+                {pathname.substring(1) === 'library'
+                  ? 'you need to add more of fav characters.'
+                  : 'this location is empty.'}
+              </span>{' '}
+              Im'here only to tell you about this.
             </p>
           )}
       </div>

@@ -4,6 +4,7 @@ import {
   SiTypescript,
   SiJavascript,
   SiReactrouter,
+  SiFirebase,
 } from 'react-icons/si';
 import { GiButterToast } from 'react-icons/gi';
 
@@ -33,6 +34,11 @@ const tools = [
     Icon: GiButterToast,
     name: 'React Toastify',
     href: 'https://fkhadra.github.io/react-toastify/introduction',
+  },
+  {
+    Icon: SiFirebase,
+    name: 'Firebase',
+    href: 'https://firebase.google.com/',
   },
 ];
 

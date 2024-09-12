@@ -1,19 +1,39 @@
 import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
 import { FormInput } from '../components';
 import { toast } from 'react-toastify';
+import { db } from '../firebaseConfig';
+import { ref, push, set, get } from 'firebase/database';
+import { UserParams } from '../types';
+import { isUserAlreadyExist } from '../utils';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const { email, password, username } = Object.fromEntries(formData);
+  const { email, password, username } = Object.fromEntries(formData) as {
+    [key: string]: string;
+  };
   if (!email || !password || !username) {
     return toast.warn('Please complete all registration fields');
   }
+
+  const usersDatabase: UserParams[] = Object.values(
+    (await get(ref(db, 'users'))).val()
+  );
+  if (isUserAlreadyExist(usersDatabase, username, email)) return null;
+
   try {
+    const userRef = push(ref(db, 'users'));
+    const userData: UserParams = {
+      email,
+      password,
+      username,
+      characters: [1],
+    };
+    set(userRef, userData);
     toast.success('Account successfully created');
     return redirect('/login');
   } catch (error) {
     toast.error('something went wrong');
-    return error;
+    return redirect('/');
   }
 };
 

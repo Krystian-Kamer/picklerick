@@ -1,19 +1,47 @@
 import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
 import { FormInput } from '../components';
 import { toast } from 'react-toastify';
+import { UserParams } from '../types';
+import { db } from '../firebaseConfig';
+import { ref, get } from 'firebase/database';
+import { AppStore } from '../store';
+import { login } from '../features/user/userSlice';
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  console.log(data);
-  try {
-    toast.success('Successfully logged in');
-    return redirect('/');
-  } catch (error) {
-    toast.error('something went wrong');
-    return error;
-  }
-};
+export const action =
+  (store: AppStore) =>
+  async ({ request }: ActionFunctionArgs) => {
+    const formData = await request.formData();
+    const { email, password } = Object.fromEntries(formData) as {
+      [key: string]: string;
+    };
+    if (!email || !password) {
+      return toast.warn('Please complete all login fields');
+    }
+    try {
+      const usersDatabase: UserParams[] = Object.values(
+        (await get(ref(db, 'users'))).val()
+      );
+      const user = usersDatabase.find((user) => user.email === email);
+      console.log(user);
+      
+      if (user) {
+        if (user.password === password) {
+          console.log(user);
+          store.dispatch(login(user));
+          toast.success('Successfully logged in');
+          return redirect('/');
+        } else {
+          toast.warn('Wrong password');
+          return null;
+        }
+      } else {
+        toast.warn('User not found');
+        return null;
+      }
+    } catch (error) {
+      return toast.error('Something went wrong');
+    }
+  };
 
 const Login = () => {
   return (
