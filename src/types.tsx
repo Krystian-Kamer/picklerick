@@ -90,5 +90,5 @@ export type UserParams = {
   password: string;
   username: string;
   characters: number[];
-  firebaseKey: string;
+  firebaseKey?: string;
 };
