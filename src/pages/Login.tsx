@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
+import { ActionFunctionArgs, Form, Link, redirect, useNavigate } from 'react-router-dom';
 import { FormInput } from '../components';
 import { toast } from 'react-toastify';
 import { UserParams } from '../types';
@@ -6,6 +6,7 @@ import { db } from '../firebaseConfig';
 import { ref, get } from 'firebase/database';
 import { AppStore } from '../store';
 import { login } from '../features/user/userSlice';
+import { useAppDispatch } from '../reduxHooks';
 
 export const action =
   (store: AppStore) =>
@@ -23,7 +24,7 @@ export const action =
       );
       const databaseKeys = Object.keys((await get(ref(db, 'users'))).val());
       const userIndex = usersDatabase.findIndex((user) => user.email === email);
-      const databaseKey: string = databaseKeys[userIndex]
+      const databaseKey: string = databaseKeys[userIndex];
       const user = { ...usersDatabase[userIndex], firebaseKey: databaseKey };
 
       if (user) {
@@ -45,6 +46,39 @@ export const action =
   };
 
 const Login = () => {
+const dispatch = useAppDispatch()
+const navigate = useNavigate()
+
+const loginDemoUser = async (e: React.MouseEvent) => {
+  e.preventDefault();
+  const email = 'rick@gmail.com';
+  const password = 'morty';
+  try {
+    const usersDatabase: UserParams[] = Object.values(
+      (await get(ref(db, 'users'))).val()
+    );
+    const databaseKeys = Object.keys((await get(ref(db, 'users'))).val());
+    const userIndex = usersDatabase.findIndex((user) => user.email === email);
+    const databaseKey: string = databaseKeys[userIndex];
+    const user = { ...usersDatabase[userIndex], firebaseKey: databaseKey };
+    if (user) {
+      if (user.password === password) {
+        dispatch(login(user));
+        toast.success('Successfully logged in');
+        return navigate('/');
+      } else {
+        toast.warn('Wrong password');
+        return null;
+      }
+    } else {
+      toast.warn('User not found');
+      return null;
+    }
+  } catch (error) {
+    return toast.error('Something went wrong');
+  }
+};
+
   return (
     <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400 mx-auto min-h-[900px] flex justify-center items-center'>
       <Form
@@ -73,8 +107,9 @@ const Login = () => {
           login
         </button>
         <button
-          type='submit'
+          type='button'
           className='bg-cyan-100 text-slate-900 uppercase rounded-lg w-full py-1 text-center font-bold lg:px-3 hover:scale-105 duration-700'
+          onClick={(e) => loginDemoUser(e)}
         >
           demo user
         </button>
