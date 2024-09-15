@@ -27,6 +27,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       password,
       username,
       characters: [1],
+      firebaseKey: '',
     };
     set(userRef, userData);
     toast.success('Account successfully created');

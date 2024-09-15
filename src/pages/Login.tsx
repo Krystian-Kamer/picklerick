@@ -23,7 +23,7 @@ export const action =
       );
       const databaseKeys = Object.keys((await get(ref(db, 'users'))).val());
       const userIndex = usersDatabase.findIndex((user) => user.email === email);
-      const databaseKey: string = databaseKeys[userIndex].substring(1);
+      const databaseKey: string = databaseKeys[userIndex]
       const user = { ...usersDatabase[userIndex], firebaseKey: databaseKey };
 
       if (user) {

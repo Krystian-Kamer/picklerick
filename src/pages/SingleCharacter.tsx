@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '../reduxHooks';
 import { db } from '../firebaseConfig';
 import { ref, update } from 'firebase/database';
 import { handleDbCharacters } from '../features/user/userSlice';
+import { toast } from 'react-toastify';
 
 const singeCharacterQuery = (id: string) => {
   return {
@@ -46,7 +47,7 @@ const SingleCharacter = () => {
     firebaseKey,
   } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  
+
   const {
     created,
     gender,
@@ -69,11 +70,20 @@ const SingleCharacter = () => {
     const updatedDbCharacters = isCharacterInDbCharacters
       ? dbCharacters.filter((dbID) => dbID !== id)
       : [...dbCharacters, id];
+
     dispatch(handleDbCharacters(updatedDbCharacters));
+
+    toast.success(
+      isCharacterInDbCharacters
+        ? 'successfully removed character from your database'
+        : 'successfully added character to your database'
+    );
+
     await update(userRef, {
       characters: updatedDbCharacters,
     });
   };
+
   const navigateToLocOrEp = (id: string, path: 'location' | 'episode') => {
     const page = Number(id) > 20 ? Math.ceil(Number(id) / 20) : 1;
     const paramId = Number(id) % 20 === 0 ? 20 : Number(id) % 20;
