@@ -21,12 +21,13 @@ export const action =
       const usersDatabase: UserParams[] = Object.values(
         (await get(ref(db, 'users'))).val()
       );
-      const user = usersDatabase.find((user) => user.email === email);
-      console.log(user);
-      
+      const databaseKeys = Object.keys((await get(ref(db, 'users'))).val());
+      const userIndex = usersDatabase.findIndex((user) => user.email === email);
+      const databaseKey: string = databaseKeys[userIndex].substring(1);
+      const user = { ...usersDatabase[userIndex], firebaseKey: databaseKey };
+
       if (user) {
         if (user.password === password) {
-          console.log(user);
           store.dispatch(login(user));
           toast.success('Successfully logged in');
           return redirect('/');

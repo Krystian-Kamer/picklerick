@@ -18,7 +18,7 @@ const Header = () => {
             className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800'
             onClick={() => {
               dispatch(logout());
-              toast.success(`${user} logged out successfully`);
+              toast.success(`Logged out successfully`);
             }}
           >
             Logout

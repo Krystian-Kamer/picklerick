@@ -9,7 +9,10 @@ import { Character } from '../types';
 import { Title, PrevButton, NextButton } from '../components';
 import { QueryClient } from '@tanstack/react-query';
 import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5';
-import { useAppSelector } from '../reduxHooks';
+import { useAppDispatch, useAppSelector } from '../reduxHooks';
+import { db } from '../firebaseConfig';
+import { ref, update } from 'firebase/database';
+import { handleDbCharacters } from '../features/user/userSlice';
 
 const singeCharacterQuery = (id: string) => {
   return {
@@ -36,10 +39,14 @@ const SingleCharacter = () => {
     character: Character;
     totalCharacters: number;
   };
-  const { username, characters: dbCharacters } = useAppSelector(
-    (state) => state.user
-  );
 
+  const {
+    username,
+    characters: dbCharacters,
+    firebaseKey,
+  } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  
   const {
     created,
     gender,
@@ -56,15 +63,21 @@ const SingleCharacter = () => {
 
   const isCharacterInDbCharacters: boolean = dbCharacters.includes(id);
 
+  const toggleDbCharacter = async () => {
+    const userRef = ref(db, `users/${firebaseKey}`);
+
+    const updatedDbCharacters = isCharacterInDbCharacters
+      ? dbCharacters.filter((dbID) => dbID !== id)
+      : [...dbCharacters, id];
+    dispatch(handleDbCharacters(updatedDbCharacters));
+    await update(userRef, {
+      characters: updatedDbCharacters,
+    });
+  };
   const navigateToLocOrEp = (id: string, path: 'location' | 'episode') => {
     const page = Number(id) > 20 ? Math.ceil(Number(id) / 20) : 1;
     const paramId = Number(id) % 20 === 0 ? 20 : Number(id) % 20;
-
     navigate(`/${path}s?page=${page}&${path}=${paramId}`);
-  };
-
-  const toggleDbCharacter = () => {
-    console.log(isCharacterInDbCharacters);
   };
 
   return (

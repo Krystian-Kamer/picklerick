@@ -6,6 +6,7 @@ const initialState: UserParams = {
   password: '',
   email: '',
   characters: [],
+  firebaseKey: '',
 };
 
 export const userSlice = createSlice({
@@ -18,15 +19,21 @@ export const userSlice = createSlice({
       state.password = user.password;
       state.email = user.email;
       state.characters = user.characters;
+      state.firebaseKey = user.firebaseKey;
     },
     logout: (state) => {
       state.username = '';
       state.password = '';
       state.email = '';
       state.characters = [1];
+      state.firebaseKey = '';
+    },
+    handleDbCharacters: (state, action: PayloadAction<number[]>) => {
+      const updatedCharacters = action.payload;
+      state.characters = updatedCharacters;
     },
   },
 });
 
-export const { logout, login } = userSlice.actions;
+export const { logout, login, handleDbCharacters } = userSlice.actions;
 export default userSlice.reducer;
