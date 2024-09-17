@@ -1,12 +1,14 @@
 import { useLoaderData, Link, useLocation } from 'react-router-dom';
 import { LoaderDataResponse } from '../types';
 import { nanoid } from 'nanoid';
-
+import { useAppSelector } from '../reduxHooks';
 const ListOfCharacters = () => {
   const response = useLoaderData() as LoaderDataResponse;
   const { characters } = response;
   const charactersArray = Array.isArray(characters) ? characters : [characters];
   const { pathname } = useLocation();
+  const { username } = useAppSelector((state) => state.user);
+
   return (
     <>
       <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-20 gap-x-4 gap-y-8 justify-center mx-5'>
@@ -36,7 +38,8 @@ const ListOfCharacters = () => {
         {charactersArray.length === 1 &&
           charactersArray[0].name === 'Rick Sanchez' && (
             <p className='text-2xl sm:text-2xl lg:text-3xl ml-8 mb-10 lg:w-[600px] font-semibold self-center'>
-              Morty, if you see me here, that means{' '}
+              <span className='capitalize'>{username}</span>, if you
+              see me here, that means{' '}
               <span className='underline'>
                 {pathname.substring(1) === 'library'
                   ? 'you need to add more of fav characters.'

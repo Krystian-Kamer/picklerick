@@ -2,13 +2,17 @@ import { IoSearch } from 'react-icons/io5';
 import { Form } from 'react-router-dom';
 import FormInput from './FormInput';
 import CharacterFormSelect from './CharacterFormSelect';
+import { useAppSelector } from '../reduxHooks';
 
 const CharactersFilter = ({ scrollToTitle }: { scrollToTitle: () => void }) => {
+  const { username } = useAppSelector((state) => state.user);
+
   return (
     <div className='flex flex-col items-center bg-slate-900 text-white rounded-3xl p-4 sm:p-0 mb-10 mx-4'>
       <div>
         <h2 className='text-2xl lg:text-4xl font-semibold py-8 sm:px-4 selection:bg-slate-800 selection:text-lime-200'>
-          Find what you want, dig in, Morty
+          Find what you want, dig in,{' '}
+          <span className='capitalize'>{username || 'morty'}</span>
         </h2>
         <Form className='flex flex-col w-full'>
           <div className='flex items-center py-2'>

@@ -10,12 +10,12 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400'>
-      <div className='flex justify-end gap-x-5 max-w-7xl mx-auto h-[30px]'>
+    <div className='w-full bg-gradient-to-r from-lime-200 to-lime-400 bg-slate-200'>
+      <div className='flex justify-end gap-x-5 max-w-7xl mx-auto relative top-2'>
         {user ? (
           <Link
             to='/'
-            className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800'
+            className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 absolute'
             onClick={() => {
               dispatch(logout());
               toast.success(`Logged out successfully`);
@@ -27,14 +27,14 @@ const Header = () => {
           <>
             <Link
               to='/login'
-              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 hover:scale-105 duration-700'
+              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 hover:scale-105 duration-700 right-32 absolute'
               onClick={() => scrollToTop()}
             >
               Login
             </Link>
             <Link
               to='/register'
-              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 hover:scale-105 duration-700'
+              className='bg-slate-900 text-lime-200 rounded-lg px-4 mt-1 uppercase font-semibold selection:bg-slate-800 hover:scale-105 duration-700 right-2 absolute'
               onClick={() => scrollToTop()}
             >
               Register

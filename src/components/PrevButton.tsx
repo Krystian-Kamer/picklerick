@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { GrFormPrevious } from 'react-icons/gr';
 import { LoaderDataResponse } from '../types';
+import { scrollToTop } from '../utils';
 
 type Params = {
   page: number;
@@ -29,6 +30,7 @@ const PrevButton = ({ page, path }: Params) => {
                 }`
           }
           className='flex items-center py-1 sm:py-2 px-4 w-fit sm:gap-x-1 bg-slate-900 text-lime-200 rounded-3xl hover:scale-105 duration-500 uppercase'
+          onClick={scrollToTop}
         >
           <GrFormPrevious className='w-14 h-14 lg:w-12 lg:h-12' />
           <span className='text-xl tracking-wider'>prev</span>
