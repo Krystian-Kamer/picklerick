@@ -9,7 +9,7 @@
   <li> In footer you will find information about me and how to contact me</li>
 </ul>
 <h4>To recreate the site locally, just clone my repository and type npm install in terminal, then npm run dev.</h4>
-<h4>It wouldn't have been successful if it wasn't for the API provided by <a href="https://rickandmortyapi.com/" target="blank" height="40" width="40">🍿 Rick & Morty API</a>.</h4>
+<h4>It wouldn't have been successful if it wasn't for the API provided by <a href="https://rickandmortyapi.com/" target="blank" height="40" width="40">Rick & Morty API</a>.</h4>
 <h4>Feel free to explore my site and if You have any questions You can simply write to me. </h4>
 
 
