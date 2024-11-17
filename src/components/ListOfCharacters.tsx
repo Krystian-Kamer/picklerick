@@ -38,8 +38,10 @@ const ListOfCharacters = () => {
         {charactersArray.length === 1 &&
           charactersArray[0].name === 'Rick Sanchez' && (
             <p className='text-2xl sm:text-2xl lg:text-3xl ml-8 mb-10 lg:w-[600px] font-semibold self-center'>
-              <span className='capitalize'>{username}</span>, if you
-              see me here, that means{' '}
+              <span className='capitalize'>
+                {username ? username : 'Morty'}
+              </span>
+              , if you see me here, that means{' '}
               <span className='underline'>
                 {pathname.substring(1) === 'library'
                   ? 'you need to add more of fav characters.'

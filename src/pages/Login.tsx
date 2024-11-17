@@ -114,7 +114,7 @@ const loginDemoUser = async (e: React.MouseEvent) => {
           demo user
         </button>
         <p>
-          Yu don't have an account?{' '}
+          You don't have an account?{' '}
           <Link
             className='text-lime-100 hover:border-b hover:border-b-lime-200'
             to='/register'
